@@ -1,0 +1,74 @@
+The following are the terms and conditions upon which WebGroup Media ("WGM") will license you (in this document, you will be referred to as "you" or the "Client") to use certain software created by and belonging to WGM, pursuant to the terms and conditions of this Software License Agreement (the "License").
+
+PLEASE READ THESE TERMS AND CONDITIONS CAREFULLY.
+
+By your usage of Cerberus Helpdesk(tm) ("Licensed Software"), you agree to be bound by the terms and conditions of this license. 
+
+1. OWNERSHIP AND LIMITS TO USE
+
+The Licensed Software and the Documentation remain at all times the sole and exclusive property of WGM. In order to protect the rights of WGM, the Client undertakes to comply with the following: 
+
+(a) The Client shall not remove, alter or obliterate any copyright notices found in the Licensed Software or its source code;  
+
+(b) You are allowed to write and distribute modifications to the GUI portion of the Licensed Software pursuant to the terms and conditions in section five of this document.
+
+(c) The Client shall ensure that its personnel, including any consultants, comply with all of the terms and conditions of this License and shall be liable for any breaches thereof.
+
+2. MINIMUM CONFIGURATION
+
+The Client is responsible for ensuring that the computer systems onto which the Licensed Software is installed meet the minimal requirements prescribed from time to time by WGM. At no time will WGM make refunds of any kind, for any reason. It is your responsibility to make sure you can meet the requirements of the script before you purchase. 
+
+3. LIMITATION OF LIABILITY
+
+THE LICENSED SOFTWARE AND THE DOCUMENTATION ARE PROVIDED TO THE CLIENT AS IS. EXCEPT AS EXPRESSLY STIPULATED HEREIN, WGM MAKES NO REPRESENTATIONS OR WARRANTIES WHATSOEVER, EXPRESS OR IMPLIED, RELATING TO THE USE, PERFORMANCE OR RESULTS WHICH MAY BE OBTAINED THROUGH THE USE OF THE LICENSED SOFTWARE, DOCUMENTATION, TECHNICAL SUPPORT AND UPGRADES. WGM EXPRESSLY DISCLAIMS ALL WARRANTIES, INCLUDING BUT NOT LIMITED TO MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. WGM SHALL IN NO EVENT BE LIABLE TO THE CLIENT UNDER ANY CIRCUMSTANCES FOR ANY LOST PROFITS OR ANY INDIRECT, SPECIAL, CONSEQUENTIAL OR PUNITIVE DAMAGES INCLUDING, WITHOUT LIMITATION, LOSS OR ALTERATION OF DATA, INTERRUPTION OF BUSINESS AND/OR LOSS OF EMPLOYEE WORK TIME. IN ANY EVENT, THE TOTAL LIABILITY OF WGM SHALL NOT EXCEED THE AGGREGATE PAYMENTS RECEIVED BY WGM HEREUNDER. 
+
+This disclaimer applies without limitation regardless of the form of action, whether in contract, tort (including negligence), strict liability, or otherwise, and regardless of whether such damages are or were foreseeable.
+
+4. INSTALLATION AND USE OF LICENSED SOFTWARE
+
+The Client shall follow the instructions found in the Documentation relating to the proper installation and use of the Licensed Software. 
+
+5. IMPROVEMENTS AND MODIFICATIONS TO THE LICENSED SOFTWARE
+
+The Client may modify, adapt, and create improvements to the Licensed Software as it deems appropriate pursuant to the following conditions and limitations:
+
+(a) All modifications made to the code must be delivered back to WGM. While WGM prefers diff's, any method the client chooses will be accepted. WGM reserves the right to use any modifications created by the Client and the Client agrees to give WGM a perpetual royalty-free license to copy, distribute, communicate to the public, modify and adapt such modifications and to sub-license others to use such modifications, which license will survive the expiration or termination of this License. WGM will credit all modification work to the original author in a way they deem appropriate. At no time is WGM to be obligated to use code submitted by the Client in their future releases of the Licensed Software.
+
+(b) You are allowed to distribute the modifications you make in source form only. The code must not be encrypted with Zend Encoder, ionCube, or any other form of PHP encrypter/compiler/obfuscator.  All code must be in a completely unencrypted/unobfuscated state. 
+
+(c) Any code developed by WGM may not be used in products outside of or unrelated to the Licensed Software. WGM retains full ownership rights to the code they developed, and only allow its use within the Licensed Software.
+
+(d) You are allowed to sell the custom modifications which you write. Please note that you should inform your customers that WGM retains the right to release updates which include your custom code and the code is not exclusively developed for their site.
+
+(e) WGM is not liable for any custom modifications you do. By making modifications to the Licensed Software, you waive any support rights which you may have been entitled to before making such changes. 
+
+6. NON TRANSFERABILITY
+
+Neither this License nor any rights or licenses granted hereunder may be assigned, transferred, delegated, sublicensed nor time shared without the prior written consent of WGM. Any such assignment, transfer, delegation, sublicense or time sharing in breach of this undertaking is void and results in the immediate termination of this License. 
+
+7. TERMINATION
+
+WGM shall have the right to terminate this License immediately without notice in the event that: 
+
+(a) The Client breaches any of the terms and conditions of this License or refuses or neglects to pay the applicable license fees when they fall due; or 
+
+(b) The Client files a petition in bankruptcy or for the appointment of a receiver, or if an involuntary petition in bankruptcy is filed against the Client and said petition is not discharged within thirty (30) days, or if the Client becomes insolvent or makes a general assignment for the benefit of its creditors, or if the business or property of the Client comes into the possession of its creditors or of a governmental agency or of a receiver; or 
+
+(c) Any future criteria which WGM deems appropriate. WGM reserves the right to add these additional criteria without notice of any kind. 
+
+The Client undertakes in the event of termination of this License to immediately cease any and all use of the Licensed Software, to deliver up to WGM the Licensed Software and the Documentation, and to destroy any copies made. 
+
+8. ENTIRE LICENSE
+
+All prior proposals, understandings, and/or agreements between the parties that relate to the subject matter of this License are hereby superseded and merged into this License. This License may not be modified or altered except in writing. 
+
+9. GOVERNING LAW
+
+This License, its construction, performance, scope, validity and effects are governed and shall be construed in accordance with the laws applicable and in force in the United States. 
+
+10. VENUE
+
+The parties agree, for any claim or judicial proceedings for whatever reason relating to this License, to designate and hereby designate the courts of the judicial district of Orange County, California, as the appropriate venue for the hearing of any such claims or judicial proceedings, to the exclusion of any other courts, judicial district or jurisdiction that may have the right to hear such dispute. 
+
+
+By using this software, you acknowledge having read this license and agree to be bound thereby.

@@ -1,0 +1,7 @@
+  <pop3>
+    <host value="###POP3_HOST###" />
+    <user value="###POP3_USER###" />
+    <password value="###POP3_PASS###" />
+    <port value="###POP3_PORT###" />
+    <delete value="###POP3_DELETE###" />
+  </pop3>

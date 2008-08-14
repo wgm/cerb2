@@ -1,0 +1,44 @@
+<html>
+<head>
+    <style>
+      body { color: 333333; font-size: 11px; font-family: Tahoma, Verdana, Helvetica, sans-serif; }
+	  a { font-family: Tahoma, Arial, Helvetica; font-weight: bold; font-size: 9pt; color: #006600; }
+	  input.stylized { border-left: solid 1px #336699; border-top: solid 1px #336699; border-right: solid 1px #666666; border-bottom: solid 1px #666666; font-family: Tahoma, Arial, Helvetica; font-weight: bold; font-size: 9pt; color: #FFFFFF; background-color: #0000AA; }
+    </style>
+</head>
+
+<body>
+	<form action="%%CHAT_SERVER_URL%%">
+	<input type="hidden" name="channel" value="chat">
+	<input type="hidden" name="module" value="window">
+	<input type="hidden" name="command" value="getframe_email">
+	<input type="hidden" name="form_submit" value="x">
+	<input type="hidden" name="visitor" value="%%GUID%%">
+	<input type="hidden" name="dept_id" value="%%DEPT_ID%%">
+	
+	We're sorry, <b>%%DEPT_NAME%%</b> is currently unavailable.  Please leave a brief message 
+	and we'll contact you as soon as possible.<br>
+	
+	<br>
+	
+	<b>Your e-mail address:</b><br>
+	<input type="text" name="visitor_email" size="35" maxlength="128"><br>
+	
+	<br>
+	
+	<b>Your message:</b><br>
+	<textarea name="visitor_question" rows="5" cols="35"></textarea><br>
+	
+	<br>
+	
+	<input type="submit" value="Send Message!" class="stylized"><br>
+	
+	<br>
+	
+	IP: %%REMOTE_ADDR%%<br>
+	
+	</form>
+	
+</body>
+
+</html>

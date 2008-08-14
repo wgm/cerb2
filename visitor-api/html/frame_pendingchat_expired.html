@@ -1,0 +1,31 @@
+	<html>
+	<head>
+		<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+		<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+		<META HTTP-EQUIV="Pragma-directive" CONTENT="no-cache">
+		<META HTTP-EQUIV="Cache-Directive" CONTENT="no-cache">
+		<META HTTP-EQUIV="Expires" CONTENT="0">
+		<style>
+			body { color: 333333; font-size: 11px; font-family: Tahoma, Verdana, Helvetica, sans-serif; }
+		</style>
+		
+		<script language="JavaScript">
+			function waitChatCheck() {
+				setTimeout("reloadChatCheck()", 2000);
+			}
+		
+			function reloadChatCheck() {
+				document.location = "%%CHAT_SERVER_URL%%?channel=chat&module=window&command=getframe_email&visitor=%%GUID%%&dept_id=%%DEPT_ID%%&ck=%%CACHE_KILL%%";
+			}
+		</script>
+	</head>
+	
+	<body onload="javascript:waitChatCheck();">
+		<div align="center">
+	
+		No answer.  Redirecting to mailbox...<br>
+		<img src="%%CHAT_SERVER_BASE_URL%%/visitor-api/images/waiting_bar_anim.gif?cK=%%CACHE_KILL%%" width="124" height="21"><br>
+		
+		</div>
+	</body>
+	</html>

@@ -1,0 +1,43 @@
+<html>
+<head>
+    <style>
+      body { color: 333333; font-size: 11px; font-family: Tahoma, Verdana, Helvetica, sans-serif; }
+	  input.stylized { border-left: solid 1px #336699; border-top: solid 1px #336699; border-right: solid 1px #666666; border-bottom: solid 1px #666666; font-family: Tahoma, Arial, Helvetica; font-weight: bold; font-size: 9pt; color: #FFFFFF; background-color: #0000AA; }
+    </style>
+</head>
+
+<body>
+	<form action="%%CHAT_SERVER_URL%%?channel=chat&module=window&command=getframe_prechat_submit" method="post">
+	<input type="hidden" name="form_submit" value="x">
+	<input type="hidden" name="visitor" value="%%GUID%%">
+	<input type="hidden" name="dept_id" value="%%DEPT_ID%%">
+	
+	Please enter the following information so we can better assist you:<br>
+	
+	<br>
+
+	<b>Department:</b><br>
+	%%DEPT_NAME%%<br>
+
+	<br>
+	
+	<b>Your first name:</b><br>
+	<input type="text" name="visitor_name" size="16" maxlength="16"><br>
+	
+	<br>
+	
+	<b>Summary of your question/issue:</b><br>
+	<textarea name="visitor_question" rows="3" cols="35"></textarea><br>
+	
+	<br>
+	
+	<input type="submit" value="Request a Live Chat!" class="stylized"><br>
+	
+	<br>
+	
+	IP: %%REMOTE_ADDR%%<br>
+	
+	</form>
+</body>
+
+</html>

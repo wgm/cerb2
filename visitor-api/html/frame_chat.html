@@ -1,0 +1,116 @@
+<html>
+<head>
+<script>
+
+  var pDocument;
+  var pWindow;
+  var chatText;
+  var funcScroll;
+
+  function setChatPointers(){
+
+  	 chatText = document.getElementById("chatText");
+  	
+    if(pWindow == null) { 
+	    if(chatText.contentWindow) { // IE6, IE5.5, Firefox 1.x, Moz 1.0+
+//	    	alert(".contentWindow");
+	      pWindow = chatText.contentWindow;
+	    }
+	    else if(window.frames && window.frames["chatText"]) { // Opera
+//	    	alert("window.frames");
+	      pWindow = window.frames["chatText"];
+	    }
+	    else if(window.top.frames && window.top.frames["chatText"]) { //IE5, Safari
+//	    	alert("window.top.frames");
+	      pWindow = window.top.frames["chatText"];
+	    }
+	    else { //Moz < 0.9, NS6, Konq
+// 	    	alert("chatText");
+	      pWindow = chatText;
+	    }
+    }
+
+    if(pDocument == null) {
+	    if(pWindow.document) { // Firefox/Moz 0.9+, Konq, Safari, IE, Opera
+	      pDocument = pWindow.document;
+	    }
+	    else { // Mozilla < 0.9, NS6
+	      pDocument = pWindow.contentDocument;
+	    }
+    }
+    
+  }
+  
+  function callLater(content) {
+     return (function() {
+        appendChat(content);
+     });
+  }
+  
+  function appendChat(content){
+  	
+    setChatPointers();
+  	
+    var newDiv = pDocument.createElement("DIV");
+
+    newDiv.innerHTML = content;
+
+    try {
+    	pDocument.getElementById("chatFrameContents").appendChild(newDiv);
+    }
+    catch(e) {
+    	 //alert("Caught: " + e);
+       //var funcRef = callLater(content);
+       //setTimeout(funcRef, 2000);
+    }
+
+    try {
+			if(chatText.contentWindow) {
+				chatText.contentWindow.scrollTo(0,pDocument.getElementById("chatFrameContents").offsetHeight);
+			}
+			else if(pWindow.scrollTo) {
+    			pWindow.scrollTo(0,pDocument.getElementById("chatFrameContents").offsetHeight);
+			}
+    }
+    catch(e) {
+//    	alert("Scroll: " + e);
+    }
+    
+  }
+  
+  function init_chat() {
+  	try {
+		if (window.frames && window.frames["frame_sendchat"] && window.frames["frame_text"]) {
+	  		window.frames["frame_sendchat"].document.location = "%%CHAT_SERVER_URL%%?channel=chat&module=window&command=getframe_sendchat&ck=%%CACHE_KILL%%";
+	  		window.frames["frame_text"].document.location = "%%CHAT_SERVER_URL%%?channel=chat&module=window&command=getframe_text&chatVisitor=%%GUID%%&r=%%ROOM_ID%%&ck=%%CACHE_KILL%%";
+	  	}
+	  	else if(window.top && window.top.frames) { // IE6/FF
+		  	window.top.frames["frame_sendchat"].document.location = "%%CHAT_SERVER_URL%%?channel=chat&module=window&command=getframe_sendchat&ck=%%CACHE_KILL%%";
+		  	window.top.frames["frame_text"].document.location = "%%CHAT_SERVER_URL%%?channel=chat&module=window&command=getframe_text&chatVisitor=%%GUID%%&r=%%ROOM_ID%%&ck=%%CACHE_KILL%%";
+	  	}
+  	}
+  	catch(e) {
+//  		alert(e);
+  	}
+  }
+  
+	window.onunload = function() {
+	   var closeThread = new Image();
+   	var date = new Date();
+	   var ck = date.getTime();
+	   
+	   closeThread.onload = function() {
+	   	return true;
+	   }
+	   
+		closeThread.src = "%%CHAT_SERVER_URL%%?channel=chat&module=window&command=end_chat&chatVisitor=%%GUID%%&r=%%ROOM_ID%%&ck=" + ck;
+	}
+	
+</script>
+</head>
+<body topmargin="0" leftmargin="0" marginheight="0" marginwidth="0" onload="init_chat();">
+	<iframe id="chatText" name="chatText" src="%%CHAT_SERVER_URL%%?channel=chat&module=window&command=getiframe_chatcontents&ck=%%CACHE_KILL%%" frameborder="no" style="width: 100%; height: 100%; border: 0px;"></iframe>
+	<iframe id="chatHeartbeat" name="chatHeartbeat" src="%%CHAT_SERVER_URL%%?channel=chat&module=window&command=getiframe_heartbeat&chatVisitor=%%GUID%%&r=%%ROOM_ID%%&ck=%%CACHE_KILL%%" frameborder="no" style="width: 0px; height: 0px; border: 0px;"></iframe>
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+<html>
+
+<head>
+	<script>
+
+	   if(window.top.frames["frame_text"] && window.top.frames["frame_text"].document.form_sendchat) {
+		   window.top.frames["frame_text"].document.form_sendchat.message_text.value = "";
+		   window.top.frames["frame_text"].document.form_sendchat.message_text.focus();
+	   }
+		
+		if(window.top.frames[2].appendChat) {
+			var content = %%CHAT_CONTENT%%;
+			window.top.frames[2].appendChat(content);
+		}
+		
+	</script>
+</head>
+
+<body bgcolor="#000000">
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+<html>
+
+<head>
+<script>
+tWindow = null;
+
+try {
+	if(window.frames && window.frames["frame_text"]) { //IE5, Konq, Safari
+		tWindow = window.frames["frame_text"];
+	}
+	else if(window.top.frames && window.top.frames["frame_text"]) { // firefox
+		tWindow = window.top.frames["frame_text"];
+	}
+}
+catch(e) {
+//	alert("Window frames: " + e);
+}
+	
+function reloadChatText() {
+	try {
+		if(parent.appendChat && document.getElementById("newChatLines"))
+			parent.appendChat(document.getElementById("newChatLines").innerHTML);
+	}
+	catch(e) {
+//		alert("Reload: " + e);
+	}
+	
+//	if(tWindow && tWindow.typingNotify)
+//		tWindow.typingNotify(%%AGENT_TYPING_BOOL%%);
+		
+	setTimeout('reloadMe()',%%VISITOR_PULL_INTERVAL%%);
+}
+
+function reloadMe() {
+	var date = new Date();
+	var ck = date.getTime();
+	document.location = "%%CHAT_SERVER_URL%%?channel=chat&module=window&command=getiframe_heartbeat&r=%%ROOM_ID%%&chatVisitor=%%GUID%%&ck=" + ck;
+}
+</script>
+</head>
+
+<body bgcolor="#FFFFFF" onload="reloadChatText();">
+%%EMBEDDED_SOUND%%
+<div id="newChatLines">
+%%CHAT_LINES%%
+</div>
+
+</body>
+
+</html>

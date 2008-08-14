@@ -1,0 +1,35 @@
+	<html>
+		<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+		<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+		<META HTTP-EQUIV="Pragma-directive" CONTENT="no-cache">
+		<META HTTP-EQUIV="Cache-Directive" CONTENT="no-cache">
+		<META HTTP-EQUIV="Expires" CONTENT="0">
+		<style>
+			body { color: 333333; font-size: 11px; font-family: Tahoma, Verdana, Helvetica, sans-serif; }
+		</style>
+		
+		<script language="JavaScript">
+			function waitVisitorChat() {
+				setTimeout("loadVisitorChat()", 2000);
+			}
+		
+			function loadVisitorChat() {
+				var date = new Date();
+				var ck = date.getTime();
+				document.location = "%%CHAT_SERVER_URL%%?channel=chat&module=window&command=getframe_chat&visitor=%%GUID%%&r=%%ROOM_ID%%&dept_id=%%DEPT_ID%%&ck=" + ck;
+			}
+		</script>
+	</head>
+	
+	<body onload="javascript:waitVisitorChat();">
+	
+		<div align="center">
+	
+		<b>Connecting you to an operator!</b>  Joining chat...<br>
+		<img src="%%CHAT_SERVER_BASE_URL%%/visitor-api/images/waiting_bar_anim.gif" width="124" height="21"><br>
+		
+		</div>
+	
+	</body>
+	
+	</html>

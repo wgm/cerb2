@@ -1,0 +1,64 @@
+<html>
+<head>
+	<style>
+		input.stylized { font-family: Tahoma, Arial, Helvetica; font-weight: bold; font-size: 9pt; color: #FFFFFF; background-color: #0000AA; }
+		.typing { font-family: Tahoma, Arial, Helvetica; font-weight: bold; font-size: 9pt; color: #FFFFFF; background-color: #0000CC; }
+	</style>
+
+	<script>
+		function chat_send_init() {
+			document.form_sendchat.message_text.value = "";
+			document.form_sendchat.message_text.focus();
+		}
+		
+      function typingNotify(bool) {
+	   	
+		  	if(!document.getElementById("agent_typing"))
+		  		return;
+		  	
+		  	if(bool)
+		  		document.getElementById("agent_typing").style.visibility = "visible";
+		  	else 
+		  		document.getElementById("agent_typing").style.visibility = "hidden";
+		}
+		
+		function chat_destroy() {
+		   window.top.frames["frame_chat"].document.location = "%%CHAT_SERVER_URL%%?channel=chat&module=window&command=getframe_postchat&chatVisitor=%%GUID%%&ck=%%CACHE_KILL%%";
+		   window.top.frames["frame_sendchat"].document.location = "%%CHAT_SERVER_URL%%?channel=chat&module=window&command=getframe_line&ck=%%CACHE_KILL%%";
+		   window.top.frames["frame_text"].document.location = "%%CHAT_SERVER_URL%%?channel=chat&module=window&command=getframe_blank&chatVisitor=%%GUID%%&ck=%%CACHE_KILL%%";
+		}
+		
+		function chat_refresh() {
+			var date = new Date();
+			var ck = date.getTime();
+//			window.top.frames["frame_chat"].frames["chatHeartbeat"].document.location = "%%CHAT_SERVER_URL%%?channel=chat&module=window&command=getiframe_heartbeat&chatVisitor=%%GUID%%&r=%%ROOM_ID%%&cK=" + ck;
+			window.top.frames["frame_chat"].document.location = "%%CHAT_SERVER_URL%%?channel=chat&module=window&command=getframe_chat&visitor=%%GUID%%&r=%%ROOM_ID%%&dept_id=%%DEPT_ID%%&ck=" + ck;
+		}
+	</script>
+</head>
+
+<body marginheight="2" marginwidth="2" topmargin="2" leftmargin="2" background="%%CHAT_SERVER_BASE_URL%%/visitor-api/images/chat_bg.jpg" onload="chat_send_init();">
+
+
+<div align="center">
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<form name="form_sendchat" action="%%CHAT_SERVER_URL%%?channel=chat&module=window&command=getframe_sendchat&ck=%%CACHE_KILL%%" target="frame_sendchat" method="post">
+<input type="hidden" name="chatVisitor" value="%%GUID%%">
+<input type="hidden" name="r" value="%%ROOM_ID%%">
+<input type="hidden" name="submit_action" value="send_message">
+	<tr>
+		<td nowrap>
+			<input type="text" size="35" name="message_text" style="width:100%;"><br>
+			<input type="submit" value="Send!" class="stylized">
+			<input type="button" value="Leave" class="stylized" onclick="javascript:chat_destroy();">
+			<input type="button" value="Reload" class="stylized" onclick="javascript:chat_refresh();">
+			<span id="agent_typing" class="typing" style="visibility:hidden;"><img src="%%CHAT_SERVER_BASE_URL%%/visitor-api/images/crystal/16x16/icon_agent.png"> Agent is typing...</div>
+		</td>
+	</tr>
+</form>
+</table>
+</div>
+
+</body>
+
+</html>
