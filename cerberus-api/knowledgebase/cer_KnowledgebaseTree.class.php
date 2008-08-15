@@ -247,7 +247,7 @@ class cer_KnowledgebaseTree {
 			$articles = array();
 			
 			$sql = "SELECT kb.kb_id, kbp.kb_problem_summary,kbp.kb_problem_text,kb.kb_public,kb.kb_avg_rating,kb.kb_rating_votes ".
-				"FROM knowledgebase_problem kbp, knowledgebase kb " . 
+				"FROM (knowledgebase_problem kbp, knowledgebase kb) " . 
 				"WHERE kb.kb_id = kbp.kb_id AND kb.kb_category_id = $cat_id";
 			$result = $this->db->query($sql);
 

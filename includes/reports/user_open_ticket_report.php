@@ -57,7 +57,7 @@ class cer_UserOpenTickets extends cer_ReportModule
 		global $sid;
 			
 		$sql = "SELECT count(t.ticket_id) AS ticket_count, t.ticket_id, t.ticket_queue_id, q.queue_name, u.user_id, u.user_name ".
-			"FROM ticket t, user u, queue q ".
+			"FROM (ticket t, user u, queue q) ".
 			"WHERE t.ticket_assigned_to_id = u.user_id ".
 			"AND t.ticket_queue_id=q.queue_id AND t.ticket_status IN ('new', 'awaiting-reply', 'customer-reply','bounced') ".
 			(($report_user_id  && $report_user_id != "-1")?"AND u.user_id='$report_user_id' ":" ").

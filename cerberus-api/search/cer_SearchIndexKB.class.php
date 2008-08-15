@@ -54,7 +54,7 @@ class cer_SearchIndexKB extends cer_SearchIndex {
 	 *	\return true
 	 */	
 	function indexSingleArticle($kbid) {
-		$sql = "SELECT `kb_problem_summary`,`kb_problem_text`,`kb_keywords`,`kb_problem_text_is_html` FROM `knowledgebase_problem`, `knowledgebase` WHERE `knowledgebase`.`kb_id`=`knowledgebase_problem`.`kb_id` AND `knowledgebase_problem`.`kb_id`=$kbid";
+		$sql = "SELECT `kb_problem_summary`,`kb_problem_text`,`kb_keywords`,`kb_problem_text_is_html` FROM (`knowledgebase_problem`, `knowledgebase`) WHERE `knowledgebase`.`kb_id`=`knowledgebase_problem`.`kb_id` AND `knowledgebase_problem`.`kb_id`=$kbid";
 		$content = $this->db->query($sql);
 		
 		if($this->db->num_rows($content) && $text = $this->db->fetch_row($content)) {

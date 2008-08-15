@@ -415,7 +415,7 @@ else if(isset($_REQUEST["form_submit"]) && count($bids))
 // [JAS]: Load Ticket Information ]*******************************************************************************************
 $sql = "SELECT t.ticket_id, t.ticket_subject, t.ticket_status, t.ticket_assigned_to_id, t.ticket_queue_id, t.ticket_priority, ".
 	"t.ticket_date, t.queue_addresses_id, ad.address_id, ad.address_address, q.queue_name, t.ticket_mask " .
-"FROM ticket t, thread th, address ad, queue q " .
+"FROM (ticket t, thread th, address ad, queue q) " .
 "WHERE th.ticket_id = t.ticket_id AND t.ticket_queue_id = q.queue_id AND th.thread_address_id = ad.address_id AND t.ticket_id = $ticket";
 $result = $cerberus_db->query($sql);
 $ticket_data = $cerberus_db->fetch_row($result);

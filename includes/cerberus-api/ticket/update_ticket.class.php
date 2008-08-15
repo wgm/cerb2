@@ -48,7 +48,7 @@ class CER_TICKET_UPDATE extends CER_TICKET_DISPLAY
 	
 	function _get_watchers()
 	{
-		$sql = "SELECT u.user_email FROM queue_access qa, user u ".
+		$sql = "SELECT u.user_email FROM (queue_access qa, user u) ".
 			"WHERE qa.user_id = u.user_id AND u.user_email != '' AND qa.queue_watch = 1 AND qa.queue_id = " . $this->ticket_queue_id;
         $result = $this->db->query($sql);
         $watchers = array();

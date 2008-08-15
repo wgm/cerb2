@@ -208,7 +208,7 @@ class CER_PARSER
 		$send_to = array();
 
 		// [JAS]: Gather requesters for this ticket (who are not suppressed).
-		$sql = "SELECT a.address_address FROM address a, requestor r ".
+		$sql = "SELECT a.address_address FROM (address a, requestor r) ".
 		"WHERE r.suppress = 0 AND r.address_id = a.address_id AND r.ticket_id = " . $ticket_obj->ticket_id;
 		$req_res = $this->db->query($sql);
 
@@ -232,7 +232,7 @@ class CER_PARSER
 
 			// [JAS]: Pull queue information
 			$sql = "SELECT q.queue_prefix, qa.queue_address, q.queue_email_display_name, qa.queue_domain ".
-			"FROM queue q, queue_addresses qa, ticket t ".
+			"FROM (queue q, queue_addresses qa, ticket t) ".
 			"WHERE q.queue_id = qa.queue_id AND t.queue_addresses_id = qa.queue_addresses_id ".
 			"AND t.ticket_id = " . $ticket_obj->ticket_id;
 			$q_res = $this->db->query($sql);
@@ -302,7 +302,7 @@ class CER_PARSER
 		$send_to = array();
 
 		// [JSJ]: Gather watchers for this ticket
-		$sql = "select u.user_email FROM queue_access qa, user u ".
+		$sql = "select u.user_email FROM (queue_access qa, user u) ".
 		"WHERE qa.user_id = u.user_id AND qa.queue_watch = 1 ".
 		"AND u.user_email != '' AND qa.queue_id = " . $ticket_obj->ticket_queue_id;
 
@@ -339,14 +339,14 @@ class CER_PARSER
 
 		// [JAS]: Try to use the queue address the ticket was opened from
 		$sql = "SELECT q.queue_prefix, qa.queue_address, qa.queue_domain ".
-		"FROM queue q, queue_addresses qa ".
+		"FROM (queue q, queue_addresses qa) ".
 		"WHERE q.queue_id = qa.queue_id AND qa.queue_addresses_id = " . $ticket_obj->queue_addresses_id;
 		$q_res = $this->db->query($sql);
 
 		// [JAS]: If the original queue e-mail address was removed, use any queue addy
 		if(!$this->db->num_rows($q_res)) {
 			$sql = "SELECT q.queue_prefix, qa.queue_address, qa.queue_domain ".
-			"FROM queue q, queue_addresses qa ".
+			"FROM (queue q, queue_addresses qa) ".
 			"WHERE q.queue_id = qa.queue_id AND qa.queue_id = " . $ticket_obj->ticket_queue_id;
 			$q_res = $this->db->query($sql);
 		}
@@ -455,7 +455,7 @@ class CER_PARSER
 		}
 
 		$sql = "SELECT q.queue_prefix, q.queue_email_display_name, qa.queue_address, qa.queue_domain ".
-		"FROM queue q, queue_addresses qa, ticket t ".
+		"FROM (queue q, queue_addresses qa, ticket t) ".
 		"WHERE q.queue_id = qa.queue_id AND t.queue_addresses_id = qa.queue_addresses_id ".
 		"AND t.ticket_id = " . $ticket_obj->ticket_id;
 		$q_res = $this->db->query($sql);

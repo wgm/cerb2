@@ -47,7 +47,7 @@ class cer_PublicUserHandler {
 		$this->set_title = "Registered Contacts";
 		
 		$sql = sprintf("SELECT pu.public_user_id, pu.name_salutation, pu.name_first, pu.name_last, pu.`public_access_level`, pu.company_id, a.address_id, a.address_address ".
-				"FROM public_gui_users pu, address a ".
+				"FROM (public_gui_users pu, address a) ".
 				"WHERE pu.public_user_id = a.public_user_id ".
 				"ORDER BY a.address_address ".
 				"LIMIT %d, %d ",
@@ -60,7 +60,7 @@ class cer_PublicUserHandler {
 		
 		// [JAS]: Override the count, since we're paging through a larger list of addresses
 		// [BGH]: useing a join instead of a Not Equals for speed
-		$sql = "SELECT count(*) as total_addresses FROM address a, public_gui_users pgu WHERE a.public_user_id=pgu.public_user_id";
+		$sql = "SELECT count(*) as total_addresses FROM (address a, public_gui_users pgu) WHERE a.public_user_id=pgu.public_user_id";
 		$res = $this->db->query($sql);
 		
 		if($row = $this->db->grab_first_row($res)) {
@@ -92,7 +92,7 @@ class cer_PublicUserHandler {
 		$find = '%' . stripslashes($query) . '%';
 		
 		$sql = sprintf("SELECT pu.public_user_id, pu.name_salutation, pu.name_first, pu.name_last, pu.`public_access_level`, pu.company_id, a.address_id, a.address_address ".
-				"FROM public_gui_users pu, address a ".
+				"FROM (public_gui_users pu, address a) ".
 				"LEFT JOIN company c ON (pu.company_id = c.id) ".
 				"WHERE pu.public_user_id = a.public_user_id ".
 				"AND ( ". 						// search params
@@ -137,7 +137,7 @@ class cer_PublicUserHandler {
 		$sql = sprintf("SELECT p.`public_user_id` , p.`name_salutation`, p.`name_first`, p.`name_last`, p.`public_access_level` , p.`mailing_address`, p.`mailing_city`, ".
 			"p.`mailing_state` , p.`mailing_zip` , p.`mailing_country_old` , p.`phone_work` , p.`phone_home` , p.`phone_mobile`, ".
 			"p.`phone_fax` , p.`password`, p.`company_id`, a.address_id, a.address_address ".
-				"FROM `public_gui_users` p, address a ".
+				"FROM (`public_gui_users` p, address a) ".
 				"WHERE p.public_user_id = a.public_user_id ".
 				"%s ",
 					((!empty($ids)) ? "AND p.`public_user_id` IN (" . implode(',',$ids) . ")" : "")

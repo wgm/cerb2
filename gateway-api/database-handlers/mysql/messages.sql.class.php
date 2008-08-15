@@ -93,7 +93,7 @@ class messages_sql
    function get_visitor_time($params) {
       extract($params);
       $sql = "SELECT cv.visitor_id, cv.visitor_name, cvr.room_id, cvr.last_update ".
-      		"FROM chat_visitors cv, chat_visitors_to_rooms cvr ".
+      		"FROM (chat_visitors cv, chat_visitors_to_rooms cvr) ".
       		"WHERE cv.visitor_id = cvr.visitor_id AND cv.visitor_sid = %s AND cvr.room_id = %d";
       return $this->db->GetRow(sprintf($sql, $this->db->qstr($visitor_sid), $room_id));
    }

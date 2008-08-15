@@ -324,7 +324,7 @@ class login_handler_mgr {
 	
 	function check_for_pm()	{
 		
-		$sql = sprintf("SELECT pm.pm_id, u.user_id as from_id FROM private_messages pm, user u ".
+		$sql = sprintf("SELECT pm.pm_id, u.user_id as from_id FROM (private_messages pm, user u) ".
 			"WHERE u.user_id = pm.pm_from_user_id AND pm.pm_to_user_id = %d AND pm.pm_notified = 0 ".
 			"ORDER BY pm.pm_date DESC LIMIT 0,1",
 				$this->user_id);

@@ -2153,7 +2153,7 @@ function migrate_chat_strings() {
 	$cerberus_db->query($sql);
 	
 	// chat_visitors.visitor_host -> chat_visitors.visitor_host_id
-	$sql = "SELECT h.host_id, cv.visitor_id from stat_hosts h, chat_visitors cv WHERE h.host = cv.visitor_host AND cv.visitor_host_id = 0";
+	$sql = "SELECT h.host_id, cv.visitor_id from (stat_hosts h, chat_visitors cv) WHERE h.host = cv.visitor_host AND cv.visitor_host_id = 0";
 	$res = $cerberus_db->query($sql);
 	if($cerberus_db->num_rows($res)) {
 		while($row = $cerberus_db->fetch_row($res)) {
@@ -2166,7 +2166,7 @@ function migrate_chat_strings() {
 	}
 
 	// chat_visitor_pages.page_referrer_host -> chat_visitor_pages.page_referrer_host_id
-	$sql = "SELECT h.host_id, cp.page_id from stat_hosts h, chat_visitor_pages cp WHERE h.host = cp.page_referrer_host AND cp.page_referrer_host_id = 0;";
+	$sql = "SELECT h.host_id, cp.page_id from (stat_hosts h, chat_visitor_pages cp) WHERE h.host = cp.page_referrer_host AND cp.page_referrer_host_id = 0;";
 	$res = $cerberus_db->query($sql);
 	if($cerberus_db->num_rows($res)) {
 		while($row = $cerberus_db->fetch_row($res)) {
@@ -2179,7 +2179,7 @@ function migrate_chat_strings() {
 	}
 	
 	// chat_visitor_pages.page_referrer -> chat_visitor_pages.page_referrer_url_id
-	$sql = "SELECT u.url_id, cp.page_id from stat_urls u, chat_visitor_pages cp WHERE u.url = cp.page_referrer AND cp.page_referrer_url_id = 0;";
+	$sql = "SELECT u.url_id, cp.page_id from (stat_urls u, chat_visitor_pages cp) WHERE u.url = cp.page_referrer AND cp.page_referrer_url_id = 0;";
 	$res = $cerberus_db->query($sql);
 	if($cerberus_db->num_rows($res)) {
 		while($row = $cerberus_db->fetch_row($res)) {
@@ -2192,7 +2192,7 @@ function migrate_chat_strings() {
 	}
 
 	// chat_visitor_pages.page_name -> chat_visitor_pages.page_url_id
-	$sql = "SELECT u.url_id, cp.page_id from stat_urls u, chat_visitor_pages cp WHERE u.url = cp.page_name AND cp.page_url_id = 0;";
+	$sql = "SELECT u.url_id, cp.page_id from (stat_urls u, chat_visitor_pages cp) WHERE u.url = cp.page_name AND cp.page_url_id = 0;";
 	$res = $cerberus_db->query($sql);
 	if($cerberus_db->num_rows($res)) {
 		while($row = $cerberus_db->fetch_row($res)) {
@@ -2205,7 +2205,7 @@ function migrate_chat_strings() {
 	}
 	
 	// chat_visitors.visitor_browser -> chat_visitors.visitor_browser_id
-	$sql = "SELECT b.browser_id, cv.visitor_id from stat_browsers b, chat_visitors cv WHERE b.browser = cv.visitor_browser AND cv.visitor_browser_id = 0;";
+	$sql = "SELECT b.browser_id, cv.visitor_id from (stat_browsers b, chat_visitors cv) WHERE b.browser = cv.visitor_browser AND cv.visitor_browser_id = 0;";
 	$res = $cerberus_db->query($sql);
 	if($cerberus_db->num_rows($res)) {
 		while($row = $cerberus_db->fetch_row($res)) {

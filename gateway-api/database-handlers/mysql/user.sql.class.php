@@ -51,7 +51,7 @@ class user_sql
       $username = $params['username'];
       $password = $params['password'];
       $sql = "SELECT u.*, uei.chat_display_name, UNIX_TIMESTAMP(u.user_last_login) AS user_last_login_timestamp ".
-      	"FROM user u, user_extended_info uei ".
+      	"FROM (user u, user_extended_info uei) ".
       	"WHERE u.user_id = uei.user_id ".
       	"AND u.user_login = %s ".
       	"AND u.user_password = %s ";

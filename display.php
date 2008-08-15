@@ -535,7 +535,7 @@ if(isset($form_submit))
 			$u_qids = $queue_access->get_readable_qid_list();
 			
 			$sql = "SELECT t.ticket_id, t.ticket_subject, t.ticket_status, t.ticket_date, t.ticket_due, t.ticket_assigned_to_id, t.ticket_queue_id, t.ticket_priority, th.thread_address_id, ad.address_address, t.queue_addresses_id, q.queue_name, t.min_thread_id, t.max_thread_id, t.ticket_reopenings, t.ticket_time_worked, t.last_reply_by_agent " .
-			"FROM ticket t, thread th, address ad, queue q " .
+			"FROM (ticket t, thread th, address ad, queue q) " .
 			"WHERE q.queue_id IN ($u_qids) AND th.ticket_id = t.ticket_id AND t.ticket_queue_id = q.queue_id AND th.thread_address_id = ad.address_id AND t.ticket_id = $ticket GROUP BY th.thread_id LIMIT 0,1";
 			$result = $cerberus_db->query($sql);
 			
@@ -1093,7 +1093,7 @@ $sql = "SELECT t.ticket_id, t.ticket_subject, t.ticket_status, t.ticket_date, t.
 	"t.ticket_priority, th.thread_address_id, ad.address_address, ".
 	"t.queue_addresses_id, q.queue_name, t.min_thread_id, t.max_thread_id, t.ticket_reopenings, t.ticket_time_worked, ".
 	"t.ticket_spam_trained, t.ticket_mask, ad.public_user_id " .
-"FROM ticket t, thread th, address ad, queue q ".
+"FROM (ticket t, thread th, address ad, queue q) ".
 //"LEFT JOIN company c ON (c.id = ad.company_id) " .
 "WHERE t.ticket_queue_id IN ($u_qids) ".
 "AND th.ticket_id = t.ticket_id ".
@@ -1191,7 +1191,7 @@ if($num_fnr_trigram_matches < 5) {
 	
 	// [JAS]: Only pull up indexed keywords from this text that exist in KB articles
 	$sql = sprintf("SELECT si.word_id, w.word, count(si.word_id)  AS instances ".
-			"FROM `search_index_kb` si, `search_words` w ".
+			"FROM (`search_index_kb` si, `search_words` w) ".
 			"WHERE si.word_id = w.word_id AND si.word_id IN ( %s )  ".
 			"GROUP BY si.word_id ".
 			"ORDER BY instances DESC ",
@@ -1252,7 +1252,7 @@ if($num_fnr_trigram_matches < 5) {
 		
 		// [JAS]: Use the above density analysis to get KB matches from the keywords
 		$sql = sprintf("SELECT k.kb_id, k.kb_category_id, kp.kb_problem_summary, count( si.kb_article_id )  AS matches ".
-				"FROM  `search_index_kb` si, `knowledgebase` k, `knowledgebase_problem` kp ".
+				"FROM  (`search_index_kb` si, `knowledgebase` k, `knowledgebase_problem` kp) ".
 				"WHERE k.kb_id = kp.kb_id AND k.kb_id = si.kb_article_id ".
 				"AND si.word_id IN ( %s )  ".
 				"%s ".

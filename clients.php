@@ -591,7 +591,7 @@ if(!empty($form_submit)) {
 			if(!$priv->has_priv(ACL_CONTACTS_CONTACT_ASSIGN,BITGROUP_3)) die(LANG_CERB_ERROR_ACCESS);
 			
 			$sql = sprintf("SELECT a.address_id, a.public_user_id, pu.company_id ".
-				"FROM address a, public_gui_users pu ".
+				"FROM (address a, public_gui_users pu) ".
 				"WHERE pu.public_user_id = a.public_user_id AND a.address_address = %s ",
 					$cerberus_db->escape($company_add_contact)
 				);

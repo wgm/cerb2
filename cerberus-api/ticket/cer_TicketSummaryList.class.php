@@ -35,7 +35,7 @@ class cer_TicketSummaryList {
 		$addy_ids = array();
 		
 		$sql = sprintf("SELECT a.address_id ".
-				"FROM address a, public_gui_users pu ".
+				"FROM (address a, public_gui_users pu) ".
 				"WHERE a.public_user_id = pu.public_user_id ".
 				"AND pu.company_id = %d",
 					$c_id
@@ -55,7 +55,7 @@ class cer_TicketSummaryList {
 		if(empty($u_ids)) return;
 		
 		$sql = sprintf("SELECT a.address_id ".
-				"FROM address a, public_gui_users pu ".
+				"FROM (address a, public_gui_users pu) ".
 				"WHERE a.public_user_id = pu.public_user_id ".
 				"AND pu.public_user_id IN (%s) ",
 					implode(",", $u_ids)
@@ -77,7 +77,7 @@ class cer_TicketSummaryList {
 			
 		$sql = sprintf("SELECT t.ticket_id, t.ticket_mask, t.ticket_subject, t.ticket_status, t.ticket_due, ".
 					"t.ticket_date, thr.thread_date, a.address_address as last_wrote_address, q.queue_id, q.queue_name ".
-				"FROM ticket t, thread th, thread thr, address a, queue q ".
+				"FROM (ticket t, thread th, thread thr, address a, queue q) ".
 				"WHERE th.thread_id = t.min_thread_id ".
 				"AND t.ticket_queue_id = q.queue_id ".
 				"AND thr.thread_id = t.max_thread_id ".

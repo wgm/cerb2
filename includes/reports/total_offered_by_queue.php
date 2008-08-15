@@ -58,7 +58,7 @@ class cer_TotalOfferedByQueue extends cer_ReportModule
 		global $sid;
 		
 		$sql = "SELECT a.address_id, a.address_address, count( a.address_id ) AS tickets, th.thread_id,  t.ticket_queue_id, t.ticket_id, q.queue_name  ".
-			"FROM address a, thread th, ticket t, queue q  ".
+			"FROM (address a, thread th, ticket t, queue q)  ".
 			"WHERE t.min_thread_id = th.thread_id ".
 			"AND th.thread_address_id = a.address_id  ".
 			"AND a.address_address != '' ".

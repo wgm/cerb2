@@ -162,7 +162,7 @@ function fix_max_thread_ids()
 {
 	global $cerberus_db;
 	
-	$sql = "SELECT t.ticket_id, t.max_thread_id, MAX( th.thread_id )  AS real_max_thread_id FROM  `ticket` t, thread th WHERE t.ticket_id = th.ticket_id AND t.ticket_status =  'resolved' GROUP  BY t.ticket_id HAVING t.max_thread_id <> real_max_thread_id";
+	$sql = "SELECT t.ticket_id, t.max_thread_id, MAX( th.thread_id )  AS real_max_thread_id FROM  (`ticket` t, thread th) WHERE t.ticket_id = th.ticket_id AND t.ticket_status =  'resolved' GROUP  BY t.ticket_id HAVING t.max_thread_id <> real_max_thread_id";
 	$res = $cerberus_db->query($sql);
 	
 	if($cerberus_db->num_rows($res)) {
@@ -468,7 +468,7 @@ function migrate_system_stats()
 		    $day_end = mktime(23,59,59,$date_array[0],$date_array[1],$date_array[2]);
 		    
 		    $sql = sprintf("SELECT count(*) As total, t.ticket_queue_id ".
-		                   "FROM ticket_audit_log tal, ticket t WHERE tal.ticket_id=t.ticket_id AND tal.action=1 AND tal.epoch <= %s AND tal.epoch >= %s ".
+		                   "FROM (ticket_audit_log tal, ticket t) WHERE tal.ticket_id=t.ticket_id AND tal.action=1 AND tal.epoch <= %s AND tal.epoch >= %s ".
 		                   "GROUP BY t.ticket_queue_id",
 		                   		$day_end,
 		                        $day_begin
@@ -1662,7 +1662,7 @@ function populate_thread_agent_bit()
 	$agent_emails = array();
 	
 	// [JAS]: Grab agent e-mail addresses
-	$sql = "SELECT u.user_email, a.address_id from user u, address a WHERE a.address_address = u.user_email";
+	$sql = "SELECT u.user_email, a.address_id (from user u, address a) WHERE a.address_address = u.user_email";
 	$res = $cerberus_db->query($sql);
 	
 	while($row = $cerberus_db->fetch_row($res)) {

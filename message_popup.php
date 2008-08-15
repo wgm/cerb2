@@ -10,7 +10,7 @@ $cerberus_db->query($sql);
 
 if(isset($mid) && !empty($mid))
 {
-	$sql = "SELECT pm.pm_id, u.user_login FROM private_messages pm, user u WHERE pm.pm_from_user_id = u.user_id AND pm.pm_id = " . $mid;
+	$sql = "SELECT pm.pm_id, u.user_login FROM (private_messages pm, user u) WHERE pm.pm_from_user_id = u.user_id AND pm.pm_id = " . $mid;
 	$result = $cerberus_db->query($sql);
 	
 	if($row = $cerberus_db->grab_first_row($result))

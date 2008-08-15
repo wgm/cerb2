@@ -55,14 +55,14 @@ class knowledgebase_sql
    
    function get_articles_by_category($params) {
    	extract($params);
-   	$sql = "SELECT kb.kb_id, kb.kb_category_id, kbp.kb_problem_summary, kb.kb_avg_rating, kb.kb_rating_votes, kb.kb_public_views FROM `knowledgebase` kb, `knowledgebase_problem` kbp WHERE kb.kb_id = kbp.kb_id AND kb.kb_category_id = '%d'";
+   	$sql = "SELECT kb.kb_id, kb.kb_category_id, kbp.kb_problem_summary, kb.kb_avg_rating, kb.kb_rating_votes, kb.kb_public_views FROM (`knowledgebase` kb, `knowledgebase_problem` kbp) WHERE kb.kb_id = kbp.kb_id AND kb.kb_category_id = '%d'";
    	return $this->db->GetAll(sprintf($sql, $category_id));
    }
 
    function get_article_by_id($params) {
    	extract($params);
    	$sql = "SELECT kb.kb_id, kb.kb_category_id, kbp.kb_problem_summary, kb.kb_avg_rating, kb.kb_rating_votes, kb.kb_public_views, kbp.kb_problem_text, kbp.kb_problem_text_is_html, kbs.kb_solution_text, kbs.kb_solution_text_is_html ".
-   	"FROM `knowledgebase` kb, `knowledgebase_problem` kbp, `knowledgebase_solution` kbs ".
+   	"FROM (`knowledgebase` kb, `knowledgebase_problem` kbp, `knowledgebase_solution` kbs) ".
    	"WHERE kb.kb_id = kbp.kb_id ".
    	"AND kb.kb_id = kbs.kb_id ".
    	"AND kb.kb_id = '%d' ";

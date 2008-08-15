@@ -376,7 +376,7 @@ class CER_MY_CERBERUS_DASHBOARD
 			$sql = sprintf("SELECT COUNT(  ".
 			"IF ( th.thread_type =  'comment', 1,  NULL)  ) AS DateCommentTotal, COUNT(  ".
 			"IF ( th.thread_type =  'email', 1,  NULL)  ) AS DateEmailTotal, DATE_FORMAT( th.thread_date,  '%%a %%b %%d'  )  AS TicketDate, SUM(th.thread_time_worked) as ThreadTimeWorked  ".
-			"FROM thread th, ticket t ".
+			"FROM (thread th, ticket t) ".
 			"WHERE th.ticket_id = t.ticket_id AND th.thread_date > DATE_SUB( NOW(  ) ,  ".
 			"INTERVAL  \"7\" ".
 			"DAY  )  AND t.ticket_status NOT  ".
@@ -429,7 +429,7 @@ class CER_MY_CERBERUS_DASHBOARD
 		$this->last_actions_title = "Tickets Worked History for " . date("l, F d Y",mktime(0,0,0,$mo_m,$mo_d,$mo_y));
 		
 		$sql = sprintf("SELECT l.ticket_id,t.ticket_subject,t.ticket_status ".
-			" FROM `ticket_audit_log` l, `ticket` t " .
+			" FROM (`ticket_audit_log` l, `ticket` t) " .
 			" WHERE t.ticket_id = l.ticket_id AND l.user_id = %d ".
 			" AND l.timestamp BETWEEN '$first_day 00:00:01' AND '$next_day 00:00:00' " .
 			" GROUP BY l.ticket_id ORDER BY l.timestamp DESC LIMIT 0,$limit",

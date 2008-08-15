@@ -167,7 +167,7 @@ class cer_SearchIndexEmail extends cer_SearchIndex {
 
 		$th_ids=array();
 		$sql = sprintf("SELECT th.thread_id, t.min_thread_id ".
-		"FROM ticket t, thread th ".
+		"FROM (ticket t, thread th) ".
 		"WHERE th.thread_id = t.max_thread_id ".
 		"AND t.ticket_id = %d " .
 		"ORDER BY t.ticket_id, th.thread_id ",
@@ -248,7 +248,7 @@ class cer_SearchIndexEmail extends cer_SearchIndex {
 		}
 		else {
 			$sql = sprintf("SELECT `si`.`word_id`, `sw`.`word` ".
-			"FROM `search_index` si, `search_words` sw ".
+			"FROM (`search_index` si, `search_words` sw) ".
 			"WHERE `si`.`word_id`=`sw`.`word_id` AND `si`.`in_first_thread`=1 AND `si`.`ticket_id`=%d",
 			$ticket_id);
 			$result = $this->db->query($sql);

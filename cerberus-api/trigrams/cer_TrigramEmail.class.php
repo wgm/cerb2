@@ -63,7 +63,7 @@ class cer_TrigramEmail extends cer_Trigram {
 		$cfg = CerConfiguration::getInstance();
 		
 		$sql = "SELECT `t`.`ticket_id`,`t`.`ticket_subject` as subject, th.thread_id ".
-				"FROM thread th, ticket t ".
+				"FROM (thread th, ticket t) ".
 				"WHERE t.min_thread_id=th.thread_id AND t.ticket_id = $ticket_id ";
 		$content = $this->db->query($sql);
 		if($this->db->num_rows($content) && $text = $this->db->fetch_row($content)) {

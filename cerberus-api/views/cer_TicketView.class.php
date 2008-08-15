@@ -148,8 +148,8 @@ class cer_TicketView {
 		}
 
 		$base_sql = "SELECT t.ticket_id, thr.thread_address_id ".
-		"FROM ticket t, thread thr, thread th, address a, address ad, queue q %s %s ".
-		"%s ".
+		"FROM (ticket t, thread thr, thread th, address a, address ad, queue q %s %s ".
+		"%s) ".
 		(($use_company) ? "LEFT JOIN public_gui_users pu ON (a.public_user_id = pu.public_user_id) " : "") .
 		(($use_company) ? "LEFT JOIN company c ON (pu.company_id = c.id) " : "") .
 		"WHERE t.min_thread_id = thr.thread_id ".
@@ -576,7 +576,7 @@ class cer_TicketView {
 		"%s ". // use company?
 		"%s ". // use owner?
 		"%s ". // custom field column?
-		"FROM ticket t, thread th, thread thr, address a, address ad, queue q ".
+		"FROM (ticket t, thread th, thread thr, address a, address ad, queue q) ".
 		"%s ". // use company?
 		"%s ". // use owner?
 		"%s ". // custom field join?
@@ -1095,7 +1095,7 @@ class cer_TicketViewSearch extends cer_TicketView {
 
 		if($this->params["search_sender"]) { // override
 		$sql = sprintf("SELECT r.address_id ".
-		"FROM requestor r, address a ".
+		"FROM (requestor r, address a) ".
 		"WHERE r.address_id = a.address_id ".
 		"AND a.address_address LIKE '%%%s%%' ".
 		"GROUP BY a.address_id",
@@ -1546,7 +1546,7 @@ class cer_TicketViewColumn
 					$this->column_proc = "view_proc_print_custom_field";
 
 					$sort_sql = sprintf("SELECT t.ticket_id, thr.thread_address_id, v_%d.field_value AS g_%d_custom_%d ".
-					"FROM ticket t, thread thr, thread th, address a, address ad, queue q %%s %%s %%s ". // [JAS]: leave the double %%, we're injecting vals later
+					"FROM (ticket t, thread thr, thread th, address a, address ad, queue q %%s %%s %%s) ". // [JAS]: leave the double %%, we're injecting vals later
 					"LEFT JOIN public_gui_users pu ON (a.public_user_id = pu.public_user_id) ".
 					"LEFT JOIN company c ON (pu.company_id = c.id) ".
 					"LEFT JOIN field_group_values v_%d ".

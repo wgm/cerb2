@@ -42,7 +42,7 @@ class cer_AgentLoginReport extends cer_ReportModule
 			$sql = "SELECT l.*, ".
 			    "DATE_FORMAT( l.local_time_login,  '%a %b %d %Y'  )  AS LoginDate, ".	
 			    "u.user_name, u.user_login ".
-			    "FROM user_login_log l, user u ".
+			    "FROM (user_login_log l, user u) ".
 				"WHERE l.user_id = u.user_id ".
 				sprintf("AND  l.local_time_login BETWEEN  '%s 00:00:00' AND  '%s 23:59:59' ",
 						$this->report_dates->from_date,

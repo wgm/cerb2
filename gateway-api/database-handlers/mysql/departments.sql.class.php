@@ -129,7 +129,7 @@ class departments_sql
    function get_department_active_agents($params) {
    	extract($params);
 		$sql = "SELECT DISTINCT u.user_id, u.user_name, uei.chat_display_name, ses.chat_status 
-			FROM gateway_session ses, user u, user_extended_info uei, department_teams dt, team_members tm 
+			FROM (gateway_session ses, user u, user_extended_info uei, department_teams dt, team_members tm) 
 			WHERE dt.team_id = tm.team_id 
 			AND tm.agent_id = u.user_id 
 			AND ses.user_id = u.user_id 

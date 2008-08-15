@@ -55,7 +55,7 @@ class cer_AttachmentManager {
 			return array();
 		
 		$sql = "SELECT f.file_id, f.file_name, f.file_size, UNIX_TIMESTAMP(th.thread_date) AS file_date, th.thread_id, th.ticket_id, t.ticket_subject ".
-			"FROM `thread_attachments` f, `thread` th, `ticket` t ".
+			"FROM (`thread_attachments` f, `thread` th, `ticket` t) ".
 			"WHERE f.thread_id = th.thread_id AND t.ticket_id = th.ticket_id ";
 		
 //		print_r($filters);

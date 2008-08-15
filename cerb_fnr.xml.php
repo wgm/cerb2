@@ -110,7 +110,7 @@ switch ($mode) {
 			$search->loadWordIDs(1);
 			
 			$sql = sprintf("SELECT k.kb_id, k.kb_category_id, kp.kb_problem_summary, count( si.kb_article_id )  AS matches ".
-					"FROM  `search_index_kb` si, `knowledgebase` k, `knowledgebase_problem` kp ".
+					"FROM  (`search_index_kb` si, `knowledgebase` k, `knowledgebase_problem` kp) ".
 					"WHERE k.kb_id = kp.kb_id AND k.kb_id = si.kb_article_id ". // AND k.kb_public = 1
 					"AND si.word_id IN ( %s )  ".
 					"%s ".

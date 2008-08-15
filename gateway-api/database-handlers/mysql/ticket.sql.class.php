@@ -58,7 +58,7 @@ class ticket_sql
                q.queue_id, q.queue_name, c.name AS company_name, u.user_name AS ticket_owner, c.id AS company_id, t.ticket_date, qa.queue_address, 
                UNIX_TIMESTAMP(t.last_update_date) AS last_update_date, thr.thread_address_id AS requester_address_id, qa.queue_domain, qa.queue_addresses_id,
                t.min_thread_id, t.max_thread_id, UNIX_TIMESTAMP(th.thread_date) AS last_wrote_date
-               FROM ticket t, thread th, thread thr, address a, address ad
+               FROM (ticket t, thread th, thread thr, address a, address ad)
                LEFT JOIN queue_addresses qa ON (t.queue_addresses_id = qa.queue_addresses_id)
                LEFT JOIN queue q ON ( q.queue_id = t.ticket_queue_id )
                LEFT JOIN public_gui_users pu ON ( ad.public_user_id = pu.public_user_id )
@@ -118,7 +118,7 @@ class ticket_sql
                q.queue_id, q.queue_name, c.name AS company_name, u.user_name AS ticket_owner, c.id AS company_id, t.ticket_date, qa.queue_address, 
                UNIX_TIMESTAMP(t.last_update_date) AS last_update_date, thr.thread_address_id AS requester_address_id, qa.queue_domain, qa.queue_addresses_id,
                t.min_thread_id, t.max_thread_id, th.thread_type AS max_thread_type, t.skill_count, UNIX_TIMESTAMP(th.thread_date) AS last_wrote_date
-               FROM ticket t, thread th, thread thr, address a, address ad
+               FROM (ticket t, thread th, thread thr, address a, address ad)
                LEFT JOIN queue_addresses qa ON (t.queue_addresses_id = qa.queue_addresses_id)
                LEFT JOIN queue q ON ( q.queue_id = t.ticket_queue_id )
                LEFT JOIN public_gui_users pu ON ( ad.public_user_id = pu.public_user_id )

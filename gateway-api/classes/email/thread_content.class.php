@@ -29,7 +29,7 @@ class thread_content_handler extends cer_ThreadContentHandler
    
    function load_ticket_content($ticket, $max_thread_id) {
 		$sql = sprintf("SELECT t.ticket_id, th.thread_id ".
-				"FROM ticket t, thread th ".
+				"FROM (ticket t, thread th) ".
 				"WHERE th.ticket_id = t.ticket_id ".
 				"AND t.ticket_id = %d AND th.thread_id > %d " .
 				"ORDER BY t.ticket_id, th.thread_id ",

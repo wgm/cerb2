@@ -55,7 +55,7 @@ class agent_sql
    } 
 
    function get_online_agents() {
-   	$sql = "SELECT ses.user_id, u.user_name, u.user_login, ses.chat_status, ses.ip_address, ses.requests, ses.login_timestamp, ses.last_timestamp FROM gateway_session ses, user u WHERE ses.user_id = u.user_id ORDER BY u.user_name";
+   	$sql = "SELECT ses.user_id, u.user_name, u.user_login, ses.chat_status, ses.ip_address, ses.requests, ses.login_timestamp, ses.last_timestamp FROM (gateway_session ses, user u) WHERE ses.user_id = u.user_id ORDER BY u.user_name";
    	return $this->db->GetAll($sql);
    }
    

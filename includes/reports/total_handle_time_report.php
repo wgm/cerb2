@@ -84,7 +84,7 @@ class cer_AverageHandleTimeReport extends cer_ReportModule
 		// [JAS]: If we're filtering by group, make a list of user IDs from a group
 		if (!empty($report_group_id)) {
 			$sql = sprintf("SELECT u.user_id ".
-						   "FROM user u, user_access_levels g ".
+						   "FROM (user u, user_access_levels g) ".
 						   "WHERE u.user_group_id = g.group_id ".
 						   "AND g.group_id = %d",
 						$report_group_id

@@ -236,7 +236,7 @@ class CER_TICKET_DISPLAY
 	{
 		$cfg = CerConfiguration::getInstance();
 		
-		$sql = sprintf("SELECT u.user_login, w.user_what_action FROM whos_online w, user u ".
+		$sql = sprintf("SELECT u.user_login, w.user_what_action FROM (whos_online w, user u) ".
 			"WHERE w.user_id = u.user_id AND u.user_login != '' AND w.user_what_arg1 = %d AND w.user_what_action IN (%d,%d,%d) AND ".
 			"w.user_timestamp BETWEEN DATE_SUB(NOW(),INTERVAL \"%d\" MINUTE) AND DATE_ADD(NOW(),INTERVAL \"1\" MINUTE)",
 					$this->ticket_id,
@@ -390,7 +390,7 @@ class CER_TICKET_DISPLAY
 		
 		$sql = "SELECT th.thread_id, th.thread_type, th.thread_date, th.thread_time_worked, ad.address_banned,ad.address_id, ad.address_address " .
 		", th.thread_subject, th.thread_to, th.thread_cc, th.thread_replyto, th.is_agent_message " . // [JAS]: jxdemel's Thread Reply/CC/Subject Patch
-		"FROM thread th, ticket tk, address ad " .
+		"FROM (thread th, ticket tk, address ad) " .
 		"WHERE th.ticket_id = tk.ticket_id AND th.thread_address_id = ad.address_id AND tk.ticket_id = " . $this->ticket_id . " ORDER BY th.thread_id ". $ticket_order;
 		$result = $this->db->query($sql);
 		
@@ -844,7 +844,7 @@ class CER_TICKET_DISPLAY_REQUESTER
 		$this->db = cer_Database::getInstance();
 		$this->ticket_ptr = &$ticket_obj;
 		
-		$sql = "SELECT a.address_id,a.address_address,r.suppress FROM address a, requestor r ".
+		$sql = "SELECT a.address_id,a.address_address,r.suppress FROM (address a, requestor r) ".
 			"WHERE r.address_id = a.address_id AND r.ticket_id = " . $this->ticket_ptr->ticket_id . " " .
 			"ORDER BY a.address_address ASC";
 		$req_res = $this->db->query($sql);
@@ -1067,7 +1067,7 @@ class CER_TICKET_DISPLAY_HISTORY
 		
 		$sql = "SELECT t.ticket_id, t.ticket_subject, t.ticket_status, t.ticket_date, th.thread_address_id, ".
 			"t.ticket_queue_id, q.queue_name, t.ticket_mask ".
-			"FROM ticket t, thread th, queue q ".
+			"FROM (ticket t, thread th, queue q) ".
 //			(($session->vars["c_history"]=="company")?", address ad, company c ":" ") .
 			"WHERE t.min_thread_id = th.thread_id AND t.ticket_queue_id = q.queue_id ".
 //			(($session->vars["c_history"]=="company")?" AND ad.address_id = th.thread_address_id AND c.id = ad.company_id ":" ") .
@@ -1289,7 +1289,7 @@ class CER_TICKET_MERGE
 		if(empty($audit_log)) $audit_log = new CER_AUDIT_LOG();
 		
 		$sql = sprintf("SELECT t.ticket_id, t.ticket_queue_id, t2.ticket_subject, t2.ticket_time_worked ".
-				"FROM ticket t, ticket t2 WHERE t.ticket_id = %d AND t2.ticket_id = %d",
+				"FROM (ticket t, ticket t2) WHERE t.ticket_id = %d AND t2.ticket_id = %d",
 			$merge_to,
 			$ticket
 			);

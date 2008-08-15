@@ -48,7 +48,7 @@ class cer_SLA {
 		}
 		
 		$sql = sprintf("SELECT sq.sla_id, sq.queue_id, sq.schedule_id, sq.response_time, q.queue_name, q.queue_mode, sch.schedule_name ".
-				"FROM sla_to_queue sq, queue q ".
+				"FROM (sla_to_queue sq, queue q) ".
 				"LEFT JOIN schedule sch ON (sch.schedule_id = sq.schedule_id) ".
 				"WHERE sq.queue_id = q.queue_id ".
 				"%s ".
@@ -87,7 +87,7 @@ class cer_SLA {
 
 	function getSlaIdForRequesterId($requester_id) {
 		$sql = sprintf("SELECT c.sla_id, c.sla_expire_date ".
-				"FROM address a, public_gui_users pu, company c ".
+				"FROM (address a, public_gui_users pu, company c) ".
 				"WHERE a.public_user_id = pu.public_user_id ".
 				"AND (c.sla_expire_date = '0000-00-00 00:00:00' OR c.sla_expire_date > NOW() ) ". // and SLA not expired
 				"AND pu.company_id = c.id ".

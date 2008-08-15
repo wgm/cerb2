@@ -39,7 +39,7 @@ class cer_ThreadTimeEntryCompanyReport extends cer_ReportModule
 		$sql = sprintf("SELECT st.thread_time_date, st.ticket_id, st.thread_time_hrs_spent,st.thread_time_hrs_chargeable,".
 			"st.thread_time_hrs_billable,st.thread_time_hrs_payable, u.user_login, u.user_name, ".
 			"st.thread_time_date_billed, a.address_id, a.address_address, c.id AS company_id, c.name AS company_name ".
-			"FROM  `thread_time_tracking` st,  `ticket` t,  `thread` th,  `address` a ".
+			"FROM  (`thread_time_tracking` st,  `ticket` t,  `thread` th,  `address` a) ".
 			"LEFT  JOIN  `user` u ON ( st.thread_time_working_agent_id = u.user_id )  ".
 			"LEFT  JOIN  `public_gui_users` pu ON ( pu.public_user_id = a.public_user_id )  ".
 			"LEFT  JOIN  `company` c ON ( c.id = pu.company_id )  ".

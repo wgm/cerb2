@@ -134,7 +134,7 @@ class visitor_sql
       extract($params);
       $sql = "SELECT cv.*, sh.host as visitor_host, sb.browser as visitor_browser, ".
       	"UNIX_TIMESTAMP() - visitor_time_start AS duration ".
-      	"FROM chat_visitors cv, stat_hosts sh, stat_browsers sb ".
+      	"FROM (chat_visitors cv, stat_hosts sh, stat_browsers sb) ".
       	"WHERE sh.host_id = cv.visitor_host_id ".
       	"AND sb.browser_id = cv.visitor_browser_id ".
       	"AND visitor_time_latest > (UNIX_TIMESTAMP() - %d)";
@@ -144,7 +144,7 @@ class visitor_sql
    function get_pages($params) {
       extract($params);
       $sql = "SELECT su.url as page_name, su2.url as page_referrer, cp.page_timestamp ".
-      	"FROM chat_visitor_pages cp, stat_urls su, stat_urls su2 ".
+      	"FROM (chat_visitor_pages cp, stat_urls su, stat_urls su2) ".
       	"WHERE su.url_id = cp.page_url_id AND su2.url_id = cp.page_referrer_url_id AND visitor_id = '%d' ".
       	"ORDER BY cp.page_timestamp ASC";
       return $this->db->GetAll(sprintf($sql, $visitor_id));
@@ -160,7 +160,7 @@ class visitor_sql
       extract($params);
       $sql = "SELECT MIN(page_id) FROM chat_visitor_pages WHERE visitor_id = '%d'";
       $min_page_id = $this->db->GetOne(sprintf($sql, $visitor_id));
-      $sql = "SELECT su.url as page_referrer FROM chat_visitor_pages cp, stat_urls su ".
+      $sql = "SELECT su.url as page_referrer FROM (chat_visitor_pages cp, stat_urls su) ".
       	"WHERE su.url_id = cp.page_referrer_url_id AND visitor_id = '%d' AND page_id = '%d'";
       return $this->db->GetOne(sprintf($sql, $visitor_id, $min_page_id));
    }
@@ -169,14 +169,14 @@ class visitor_sql
       extract($params);
       $sql = "SELECT MAX(page_id) FROM chat_visitor_pages WHERE visitor_id = '%d'";
       $max_page_id = $this->db->GetOne(sprintf($sql, $visitor_id));
-      $sql = "SELECT u.url as page_name FROM stat_urls u, chat_visitor_pages cp WHERE cp.page_url_id = u.url_id AND cp.visitor_id = '%d' AND cp.page_id = '%d'";
+      $sql = "SELECT u.url as page_name FROM (stat_urls u, chat_visitor_pages cp) WHERE cp.page_url_id = u.url_id AND cp.visitor_id = '%d' AND cp.page_id = '%d'";
       return $this->db->GetOne(sprintf($sql, $visitor_id, $max_page_id));
    }
    
    function get_visitor_info($params) {
       extract($params);
       $sql = "SELECT cv.*, sh.host as visitor_host, sb.browser as visitor_browser ".
-      	"FROM chat_visitors cv, stat_hosts sh, stat_browsers sb ".
+      	"FROM (chat_visitors cv, stat_hosts sh, stat_browsers sb) ".
       	"WHERE sh.host_id = cv.visitor_host_id ".
       	"AND sb.browser_id = cv.visitor_browser_id ".
       	"AND visitor_id = '%d'";

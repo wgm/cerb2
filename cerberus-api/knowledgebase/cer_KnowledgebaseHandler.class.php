@@ -147,7 +147,7 @@ class cer_KnowledgebaseHandler
 		$keywords = array();
 		
 		$sql = sprintf("SELECT si.word_id, w.word, count(si.word_id)  AS instances ".
-				"FROM `search_index_kb` si, `search_words` w ".
+				"FROM (`search_index_kb` si, `search_words` w) ".
 				"WHERE si.word_id = w.word_id AND si.word_id IN ( %s )  ".
 				"GROUP BY si.word_id ".
 				"ORDER BY instances DESC ".

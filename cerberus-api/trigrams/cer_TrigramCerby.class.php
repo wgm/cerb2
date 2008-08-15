@@ -271,15 +271,17 @@ class cer_TrigramCerby {
 	function _getSuggestionData($tg_ids, $howmany=5, $exclude_kbid=0, $public_only=0, $include_kb_catids=NULL) {
 		$tgcount = count($tg_ids);
 		
-		$from_sql = "FROM `trigram_to_kb` tk, `knowledgebase_problem` kp ";
+		$from_sql = "FROM (`trigram_to_kb` tk, `knowledgebase_problem` kp ";
 			
 		$public_sql = "";
 		if(!empty($public_only) && 1==$public_only) {
-			$from_sql .= ", `knowledgebase` k ";
+			$from_sql .= ", `knowledgebase` k) ";
 			$public_sql = "`k`.`kb_public`=1 AND `k`.`kb_id`=`tk`.`knowledgebase_id` AND ";
 			if(is_array($include_kb_catids)) {
 				$public_sql .= sprintf("`k`.`kb_category_id` IN ( %s ) AND ", implode(',', $include_kb_catids));
 			}
+		} else {
+			$from_sql .= ") ";
 		}
 		
 		$exclude_sql = "";

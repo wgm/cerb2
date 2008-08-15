@@ -40,7 +40,7 @@ class cer_ThreadContentHandler {
 	
 	function loadTicketContentDB($ticket) {
 		$sql = sprintf("SELECT t.ticket_id, th.thread_id ".
-				"FROM ticket t, thread th ".
+				"FROM (ticket t, thread th) ".
 				"WHERE th.ticket_id = t.ticket_id ".
 				"AND t.ticket_id = %d " .
 				"ORDER BY t.ticket_id, th.thread_id ",

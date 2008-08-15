@@ -51,7 +51,7 @@ class thread_sql
       $ticket_id = 0+$params['ticket_id'];
       $order = $params['thread_order'];
       $sql = "SELECT th.thread_id, th.thread_type, th.thread_date, th.thread_time_worked, ad.address_banned,ad.address_id, ad.address_address,
-               th.thread_subject, th.thread_to, th.thread_cc, th.thread_replyto, th.is_agent_message FROM thread th, ticket tk, address ad WHERE 
+               th.thread_subject, th.thread_to, th.thread_cc, th.thread_replyto, th.is_agent_message FROM (thread th, ticket tk, address ad) WHERE 
                th.ticket_id = tk.ticket_id AND th.thread_address_id = ad.address_id AND tk.ticket_id = %d ORDER BY th.thread_id %s";
       return $this->db->GetAll(sprintf($sql, $ticket_id, $order));
    }
@@ -68,7 +68,7 @@ class thread_sql
       $order = $params['thread_order'];
       $sql = "SELECT th.thread_id, th.thread_type, th.thread_date, th.thread_time_worked, ad.address_banned,ad.address_id, ad.address_address,
                th.thread_subject, th.thread_to, th.thread_cc, th.thread_replyto, th.is_agent_message, UNIX_TIMESTAMP(th.thread_date) AS thread_timestamp
-               FROM thread th, ticket tk, address ad WHERE th.ticket_id = tk.ticket_id AND th.thread_address_id = ad.address_id AND tk.ticket_id = %d 
+               FROM (thread th, ticket tk, address ad) WHERE th.ticket_id = tk.ticket_id AND th.thread_address_id = ad.address_id AND tk.ticket_id = %d 
                AND th.thread_id > %d ORDER BY th.thread_id %s";
       return $this->db->GetAll(sprintf($sql, $ticket_id, $max_thread_id, $order));
    }
