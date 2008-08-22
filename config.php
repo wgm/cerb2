@@ -3,10 +3,10 @@
 // Database connection information
 // Type your information in between the single quotes ('s) below
 
-define("DB_SERVER",'localhost');   
-define("DB_NAME",'c2');
-define("DB_USER",'c2');
-define("DB_PASS",'c2');
+define("DB_SERVER",'');   
+define("DB_NAME",'');
+define("DB_USER",'');
+define("DB_PASS",'');
 
 
 // [JAS]: IPs that we'll allow to view upgrade.php.  
