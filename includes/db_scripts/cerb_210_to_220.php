@@ -172,7 +172,7 @@ function init_table_tasks()
 	$TABLE_DEF->create_sql = "CREATE TABLE `tasks` (".
 		"task_id bigint(20) unsigned NOT NULL auto_increment,".
 		"task_summary varchar(255) NOT NULL default '',".
-		"task_description text NOT NULL,".
+		"task_description text,".
 		"task_progress tinyint(4) NOT NULL default '0',".
 		"task_created_uid bigint(20) NOT NULL default '0',".
 		"task_assigned_uid bigint(20) NOT NULL default '0',".
@@ -223,7 +223,7 @@ function init_table_tasks_projects()
 		"project_id bigint(20) unsigned NOT NULL auto_increment,".
 		"project_name varchar(128) NOT NULL default '',".
 		"project_manager_uid bigint(20) NOT NULL default '0',".
-		"project_acl text NOT NULL,".
+		"project_acl text,".
 		"PRIMARY KEY  (project_id)".
 		") TYPE=MyISAM;";
 	  
@@ -273,7 +273,7 @@ function init_table_tasks_notes()
 		"task_id bigint(20) unsigned NOT NULL default '0',".
 		"note_poster_uid bigint(20) unsigned NOT NULL default '0',".
 		"note_timestamp datetime NOT NULL default '0000-00-00 00:00:00',".
-		"note_text text NOT NULL,".
+		"note_text text,".
 		"PRIMARY KEY  (note_id),".
 		"KEY note_poster_uid (note_poster_uid),".
 		"KEY task_id (task_id)".

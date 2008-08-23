@@ -692,7 +692,7 @@ function update_table_public_gui_profiles()
 	}
 
 	if(!isset($TABLE_DEF->fields["pub_confirmation_body"])) {
-		$TABLE_DEF->add_field("pub_confirmation_body","TEXT DEFAULT '' NOT NULL");
+		$TABLE_DEF->add_field("pub_confirmation_body","TEXT");
 	}
 
 	if(isset($TABLE_DEF->fields["pub_kb_resolved_issue"])) {
@@ -756,7 +756,7 @@ function update_table_public_gui_profiles()
 	}
 	
 	if(!isset($TABLE_DEF->fields["pub_mod_welcome_text"])) {
-		$TABLE_DEF->add_field("pub_mod_welcome_text","TEXT DEFAULT '' NOT NULL");
+		$TABLE_DEF->add_field("pub_mod_welcome_text","TEXT");
 	}
 	
 	if(!isset($TABLE_DEF->fields["pub_mod_contact"])) {
@@ -764,7 +764,7 @@ function update_table_public_gui_profiles()
 	}
 	
 	if(!isset($TABLE_DEF->fields["pub_mod_contact_text"])) {
-		$TABLE_DEF->add_field("pub_mod_contact_text","TEXT DEFAULT '' NOT NULL");
+		$TABLE_DEF->add_field("pub_mod_contact_text","TEXT");
 	}
 	
 }
@@ -1090,7 +1090,7 @@ function update_table_queue()
 	}
 	
 	if(!isset($TABLE_DEF->fields["queue_response_gated"])) {
-		$TABLE_DEF->add_field("queue_response_gated","TEXT NOT NULL");
+		$TABLE_DEF->add_field("queue_response_gated","TEXT");
 	}
 
 	if(isset($TABLE_DEF->fields["queue_restricted"])) {

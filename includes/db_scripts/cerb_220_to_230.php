@@ -86,7 +86,7 @@ function init_table_public_gui_fields()
 	$TABLE_DEF->create_sql = "CREATE TABLE public_gui_fields (".
 		"group_id bigint(20) unsigned NOT NULL auto_increment,".
 		"group_name varchar(64) NOT NULL default '',".
-		"group_fields text NOT NULL,".
+		"group_fields text,".
 		"PRIMARY KEY  (group_id)".
 		") TYPE=MyISAM;";
 	  
@@ -115,10 +115,10 @@ function init_table_public_gui_profiles()
 		"pub_company_name varchar(128) NOT NULL default '',".
 		"pub_company_email varchar(128) NOT NULL default '',".
 		"pub_new_registration_subject varchar(250) NOT NULL default '',".
-		"pub_new_registration_body text NOT NULL,".
-		"pub_queues text NOT NULL,".
-		"pub_kb_resolved_issue text NOT NULL,".
-		"pub_kb_not_resolved_issue text NOT NULL,".
+		"pub_new_registration_body text,".
+		"pub_queues text,".
+		"pub_kb_resolved_issue text,".
+		"pub_kb_not_resolved_issue text,".
 		"PRIMARY KEY  (profile_id)".
 		") TYPE=MyISAM;";
 	  
@@ -309,7 +309,7 @@ function init_table_user_notification()
 	
 	$TABLE_DEF->create_sql = "CREATE TABLE `user_notification` (" .
 		"`user_id` BIGINT UNSIGNED NOT NULL ," .
-		"`notify_options` TEXT NOT NULL ," .
+		"`notify_options` TEXT," .
 			"UNIQUE (" .
 			"`user_id`" .
 			")" .

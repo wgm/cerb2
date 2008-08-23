@@ -1279,7 +1279,7 @@ function init_table_thread_attachments_parts()
 	$TABLE_DEF->create_sql = "CREATE TABLE `thread_attachments_parts` (".
 		"`part_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,".
 		"`file_id` BIGINT UNSIGNED NOT NULL ,".
-		"`part_content` MEDIUMBLOB NOT NULL ,".
+		"`part_content` MEDIUMBLOB,".
 		"PRIMARY KEY ( `part_id` ) ,".
 		"INDEX ( `file_id` ) ".
 		");";

@@ -366,7 +366,7 @@ function init_table_chat_canned_text()
 		"  `text_private` tinyint(4) unsigned NOT NULL default '0',".
 		"  `text_private_agent_id` bigint(20) unsigned NOT NULL default '0',".
 		"  `text_category` bigint(20) unsigned NOT NULL default '0',".
-		"  `canned_text` text NOT NULL,".
+		"  `canned_text` text,".
 		"  `last_update` bigint(20) default '0',".
 		"  PRIMARY KEY  (`text_id`),".
 		"  KEY `text_private` (`text_private`),".
@@ -1111,7 +1111,7 @@ function init_table_chat_visitors_to_invites()
 		"  `invite_date` bigint(20) NOT NULL default '0',".
 		"  `visitor_id` bigint(20) unsigned NOT NULL default '0',".
 		"  `agent_id` bigint(20) unsigned NOT NULL default '0',".
-		"  `invite_message` text NOT NULL,".
+		"  `invite_message` text,".
 		"  PRIMARY KEY  (`invite_id`),".
 		"  KEY `visitor_id` (`visitor_id`),".
 		"  KEY `agent_id` (`agent_id`)".
@@ -1420,7 +1420,7 @@ function init_table_gateway_session()
 		"  `login_timestamp` bigint(20) NOT NULL default '0',".
 		"  `last_timestamp` bigint(20) NOT NULL default '0',".
 		"  `requests` bigint(20) NOT NULL default '0',".
-		"  `session_data` longtext NOT NULL,".
+		"  `session_data` longtext,".
 		"  `chat_status` tinyint(3) unsigned NOT NULL default '0',".
 		"  PRIMARY KEY  (`session_id`),".
 		"  KEY `session_checker` (`user_id`,`php_sid_cookie`,`ip_address`),".
@@ -1465,7 +1465,7 @@ function init_table_heartbeat_event_payload()
 
    $TABLE_DEF->create_sql = "CREATE TABLE `heartbeat_event_payload` (".
 		"  `event_id` bigint(20) unsigned NOT NULL default '0',".
-		"  `payload` text NOT NULL,".
+		"  `payload` text,".
 		"  PRIMARY KEY  (`event_id`)".
 		") TYPE=MyISAM";
 
@@ -1999,7 +1999,7 @@ function init_table_saved_reports() {
 		"`report_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT ,".
 		"`report_name` CHAR( 32 ) NOT NULL ,".
 		"`report_category` INT ( 10 ) NOT NULL ,".
-		"`report_data` TEXT NOT NULL ,".
+		"`report_data` TEXT,".
 		"PRIMARY KEY ( `report_id` )".
 		");";
 
@@ -2026,7 +2026,7 @@ function init_table_user_prefs_xml() {
 		"`user_id` INT(11) UNSIGNED NOT NULL ,".
 		"`workspace_id` INT(11) UNSIGNED NOT NULL ,".
 		"`pref_id` INT(11) UNSIGNED NOT NULL ,".
-		"`pref_xml` TEXT NOT NULL ,".
+		"`pref_xml` TEXT,".
 		"UNIQUE pref_key (".
 		"`user_id` ,".
 		"`workspace_id` ,".
@@ -2068,7 +2068,7 @@ function update_table_rule_action()
 	
 	if(isset($TABLE_DEF->fields["action_value"]) 
 		&& strtolower($TABLE_DEF->fields["action_value"]->field_type) != "text") {
-			$TABLE_DEF->run_sql("ALTER TABLE `rule_action` CHANGE `action_value` `action_value` TEXT NOT NULL","Changing rule_action.action_value type to 'text'");
+			$TABLE_DEF->run_sql("ALTER TABLE `rule_action` CHANGE `action_value` `action_value` TEXT","Changing rule_action.action_value type to 'text'");
 	}
 }
 

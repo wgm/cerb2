@@ -93,7 +93,7 @@ function insert_table_private_messages()
 	  "pm_subject varchar(128) NOT NULL default '',".
 	  "pm_date datetime NOT NULL default '0000-00-00 00:00:00',".
 	  "pm_folder_id bigint(20) NOT NULL default '0',".
-	  "pm_message text NOT NULL,".
+	  "pm_message text,".
 	  "pm_marked_read tinyint(4) NOT NULL default '0',".
 	  "pm_read_receipt tinyint(4) NOT NULL default '0',".
 	  "pm_notified tinyint(4) NOT NULL default '0',".

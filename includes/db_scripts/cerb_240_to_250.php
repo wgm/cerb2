@@ -202,7 +202,7 @@ function init_table_thread_time_tracking()
 		"thread_time_hrs_billable float NOT NULL default '0', ".
 		"thread_time_hrs_payable float NOT NULL default '0', ".
 		"thread_time_working_agent_id bigint(20) unsigned NOT NULL default '0', ".
-		"thread_time_summary text NOT NULL, ".
+		"thread_time_summary text, ".
 		"thread_time_date_billed datetime NOT NULL default '0000-00-00 00:00:00', ".
 		"thread_time_created_by_id bigint(20) unsigned NOT NULL default '0', ".
 		"thread_time_created_date datetime NOT NULL default '0000-00-00 00:00:00', ".
@@ -244,7 +244,7 @@ function init_table_user_layout()
 	$TABLE_DEF->create_sql = "CREATE TABLE `user_layout` (".
 		"`layout_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,".
 		"`user_id` BIGINT UNSIGNED NOT NULL ,".
-		"`layout_data` TEXT NOT NULL ,".
+		"`layout_data` TEXT,".
 		"PRIMARY KEY ( `layout_id` ) ,".
 		"INDEX ( `user_id` ) ".
 		");";

@@ -2158,7 +2158,7 @@ function init_table_thread_attachments_parts()
 	$TABLE_DEF->create_sql = "CREATE TABLE `thread_attachments_parts` (".
 								"  `part_id` bigint(20) unsigned NOT NULL auto_increment,".
 								"  `file_id` bigint(20) unsigned NOT NULL default '0',".
-								"  `part_content` mediumblob NOT NULL,".
+								"  `part_content` mediumblob,".
 								"  PRIMARY KEY  (`part_id`),".
 								"  KEY `file_id` (`file_id`)".
 								") TYPE=MyISAM;";

@@ -538,7 +538,7 @@ function init_table_email_templates()
 								"  `template_id` bigint(20) unsigned NOT NULL auto_increment,".
 								"  `template_name` char(128) NOT NULL default '',".
 								"  `template_description` char(255) NOT NULL default '',".
-								"  `template_text` text NOT NULL,".
+								"  `template_text` text,".
 								"  `template_created_by` bigint(20) NOT NULL default '0',".
 								"  `template_private` tinyint(4) NOT NULL default '0',".
 								"  PRIMARY KEY  (`template_id`)".
@@ -830,7 +830,7 @@ function init_table_knowledgebase_comments()
 								"  `kb_comment_approved` tinyint(4) NOT NULL default '0',".
 								"  `kb_comment_date` datetime NOT NULL default '0000-00-00 00:00:00',".
 								"  `poster_email` char(128) NOT NULL default '',".
-								"  `poster_comment` text NOT NULL,".
+								"  `poster_comment` text,".
 								"  `poster_ip` char(16) NOT NULL default '0.0.0.0',".
 								"  PRIMARY KEY  (`kb_comment_id`),".
 								"  KEY `kb_article_id` (`kb_article_id`),".
@@ -865,7 +865,7 @@ function init_table_knowledgebase_problem()
 								"  `kb_problem_id` int(10) unsigned NOT NULL auto_increment,".
 								"  `kb_id` int(10) unsigned NOT NULL default '0',".
 								"  `kb_problem_summary` char(128) NOT NULL default '',".
-								"  `kb_problem_text` text NOT NULL,".
+								"  `kb_problem_text` text,".
 								"  `kb_problem_text_is_html` tinyint(4) NOT NULL default '0',".
 								"  PRIMARY KEY  (`kb_problem_id`)".
 								") TYPE=MyISAM;";
@@ -922,7 +922,7 @@ function init_table_knowledgebase_solution()
 	$TABLE_DEF->create_sql = "CREATE TABLE `knowledgebase_solution` (".
 								"  `kb_solution_id` int(10) unsigned NOT NULL auto_increment,".
 								"  `kb_id` int(10) unsigned NOT NULL default '0',".
-								"  `kb_solution_text` text NOT NULL,".
+								"  `kb_solution_text` text,".
 								"  `kb_solution_text_is_html` tinyint(4) NOT NULL default '0',".
 								"  PRIMARY KEY  (`kb_solution_id`)".
 								") TYPE=MyISAM;";
@@ -948,7 +948,7 @@ function init_table_log()
 	
 	$TABLE_DEF->create_sql = "CREATE TABLE `log` (".
 								"  `log_id` bigint(20) unsigned NOT NULL auto_increment,".
-								"  `message` text NOT NULL,".
+								"  `message` text,".
 								"  `log_date` timestamp(14) NOT NULL,".
 								"  PRIMARY KEY  (`log_id`) ".
 								") TYPE=MyISAM;";
@@ -1060,7 +1060,7 @@ function init_table_private_messages()
 			"  `pm_subject` char(128) NOT NULL default '',".
 			"  `pm_date` datetime NOT NULL default '0000-00-00 00:00:00',".
 			"  `pm_folder_id` bigint(20) NOT NULL default '0',".
-			"  `pm_message` text NOT NULL,".
+			"  `pm_message` text,".
 			"  `pm_marked_read` tinyint(4) NOT NULL default '0',".
 			"  `pm_read_receipt` tinyint(4) NOT NULL default '0',".
 			"  `pm_notified` tinyint(4) NOT NULL default '0',".
@@ -1096,7 +1096,7 @@ function init_table_product_key()
 	$TABLE_DEF = new CER_DB_TABLE("product_key",false);
 	
 	$TABLE_DEF->create_sql = "CREATE TABLE `product_key` (".
-  		"`key_file` text NOT NULL,".
+  		"`key_file` text,".
   		"`key_date` timestamp(14) NOT NULL".
 		") TYPE=MyISAM;";
 
@@ -1117,7 +1117,7 @@ function init_table_product_key_info()
 	$TABLE_DEF = new CER_DB_TABLE("product_key_info",false);
 	
 	$TABLE_DEF->create_sql = "CREATE TABLE `product_key_info` (".
-		"`key_domains` tinytext NOT NULL,".
+		"`key_domains` tinytext,".
   		"`key_maxqueues` int(11) NOT NULL default '0',".
   		"`key_tagline` char(255) NOT NULL default '',".
   		"`key_lastupdate` timestamp(14) NOT NULL,".
@@ -1147,7 +1147,7 @@ function init_table_public_gui_fields()
 	$TABLE_DEF->create_sql = "CREATE TABLE `public_gui_fields` (".
 								"  `group_id` bigint(20) unsigned NOT NULL auto_increment,".
 								"  `group_name` char(64) NOT NULL default '',".
-								"  `group_fields` text NOT NULL,".
+								"  `group_fields` text,".
 								"  PRIMARY KEY  (`group_id`)".
 								") TYPE=MyISAM;";
 	  
@@ -1174,9 +1174,9 @@ function init_table_public_gui_profiles()
 								"  `profile_name` char(64) NOT NULL default '',".
 								"  `pub_company_name` char(128) NOT NULL default '',".
 								"  `pub_company_email` char(128) NOT NULL default '',".
-								"  `pub_queues` text NOT NULL,".
+								"  `pub_queues` text,".
 								"  `pub_confirmation_subject` char(128) NOT NULL default '',".
-								"  `pub_confirmation_body` text NOT NULL,".
+								"  `pub_confirmation_body` text,".
 								"  `pub_mod_registration` tinyint(4) NOT NULL default '0',".
 								"  `pub_mod_registration_mode` char(12) NOT NULL default '',".
 								"  `pub_mod_kb` tinyint(4) NOT NULL default '0',".
@@ -1187,9 +1187,9 @@ function init_table_public_gui_profiles()
 								"  `pub_mod_announcements` tinyint(4) NOT NULL default '0',".
 								"  `pub_mod_welcome` tinyint(4) NOT NULL default '0',".
 								"  `pub_mod_welcome_title` char(64) NOT NULL default '',".
-								"  `pub_mod_welcome_text` text NOT NULL,".
+								"  `pub_mod_welcome_text` text,".
 								"  `pub_mod_contact` tinyint(4) NOT NULL default '0',".
-								"  `pub_mod_contact_text` text NOT NULL,".
+								"  `pub_mod_contact_text` text,".
 								"  `login_plugin_id` bigint(20) unsigned DEFAULT 0 NOT NULL,".
 								"  PRIMARY KEY  (`profile_id`)".
 								") TYPE=MyISAM;";
@@ -1330,14 +1330,14 @@ function init_table_queue()
 								"  `queue_id` int(11) NOT NULL auto_increment,".
 								"  `queue_name` char(32) NOT NULL default '',".
 								"  `queue_prefix` char(32) NOT NULL default '',".
-								"  `queue_response_open` text NOT NULL,".
-								"  `queue_response_close` text NOT NULL,".
+								"  `queue_response_open` text,".
+								"  `queue_response_close` text,".
 								"  `queue_send_open` tinyint(4) NOT NULL default '0',".
 								"  `queue_send_closed` tinyint(4) NOT NULL default '0',".
 								"  `queue_core_update` tinyint(4) NOT NULL default '0',".
 								"  `queue_email_display_name` char(64) NOT NULL default '',".
 								"  `queue_mode` tinyint(4) NOT NULL default '0',".
-								"  `queue_response_gated` text NOT NULL,".
+								"  `queue_response_gated` text,".
 								"  `queue_default_schedule` bigint(20) NOT NULL default '0',".
 								"  `queue_default_response_time` int(11) NOT NULL default '0',".
 								"  `queue_addresses_inherit_qid` bigint(20) NOT NULL default '0',".
@@ -1519,7 +1519,7 @@ function init_table_rule_action()
 	$TABLE_DEF->create_sql = "CREATE TABLE `rule_action` (".
 								"  `rule_id` bigint(20) unsigned NOT NULL default '0',".
 								"  `action_type` int(10) unsigned NOT NULL default '0',".
-								"  `action_value` text NOT NULL default '',".
+								"  `action_value` text,".
 								"  KEY `rule_id` (`rule_id`)".
 								") TYPE=MyISAM;";
 
@@ -1803,7 +1803,7 @@ function init_table_session_vars()
 	$TABLE_DEF->create_sql = "CREATE TABLE `session_vars` (".
 								"  `s_id` bigint(20) unsigned NOT NULL default '0',".
 								"  `var_name` char(64) NOT NULL default '',".
-								"  `var_val` text NOT NULL,".
+								"  `var_val` text,".
 								"  KEY `s_id` (`s_id`),".
 								"  KEY `var_name` (`var_name`)".
 								") TYPE=MyISAM;";
@@ -1963,7 +1963,7 @@ function init_table_tasks()
 	$TABLE_DEF->create_sql = "CREATE TABLE `tasks` (".
 								"  `task_id` bigint(20) unsigned NOT NULL auto_increment,".
 								"  `task_summary` char(255) NOT NULL default '',".
-								"  `task_description` text NOT NULL,".
+								"  `task_description` text,".
 								"  `task_progress` tinyint(4) NOT NULL default '0',".
 								"  `task_created_uid` bigint(20) NOT NULL default '0',".
 								"  `task_assigned_uid` bigint(20) NOT NULL default '0',".
@@ -2018,7 +2018,7 @@ function init_table_tasks_notes()
 		"task_id bigint(20) unsigned NOT NULL default '0',".
 		"note_poster_uid bigint(20) unsigned NOT NULL default '0',".
 		"note_timestamp datetime NOT NULL default '0000-00-00 00:00:00',".
-		"note_text text NOT NULL,".
+		"note_text text,".
 		"PRIMARY KEY  (note_id),".
 		"KEY note_poster_uid (note_poster_uid),".
 		"KEY task_id (task_id)".
@@ -2051,7 +2051,7 @@ function init_table_tasks_projects()
 								"  `project_id` bigint(20) unsigned NOT NULL auto_increment,".
 								"  `project_name` char(128) NOT NULL default '',".
 								"  `project_manager_uid` bigint(20) NOT NULL default '0',".
-								"  `project_acl` text NOT NULL,".
+								"  `project_acl` text,".
 								"  PRIMARY KEY  (`project_id`)".
 								") TYPE=MyISAM;";
 	  
@@ -2200,7 +2200,7 @@ function init_table_thread_attachments_parts()
 	$TABLE_DEF->create_sql = "CREATE TABLE `thread_attachments_parts` (".
 								"  `part_id` bigint(20) unsigned NOT NULL auto_increment,".
 								"  `file_id` bigint(20) unsigned NOT NULL default '0',".
-								"  `part_content` mediumblob NOT NULL,".
+								"  `part_content` mediumblob,".
 								"  PRIMARY KEY  (`part_id`),".
 								"  KEY `file_id` (`file_id`)".
 								") TYPE=MyISAM;";
@@ -2292,7 +2292,7 @@ function init_table_thread_errors()
 								"  `error_id` bigint(20) unsigned NOT NULL auto_increment,".
 								"  `ticket_id` bigint(20) unsigned NOT NULL default '0',".
 								"  `thread_id` bigint(20) unsigned NOT NULL default '0',".
-								"  `error_msg` text NOT NULL,".
+								"  `error_msg` text,".
 								"  PRIMARY KEY  (`error_id`),".
 								"  KEY `ticket_id` (`ticket_id`),".
 								"  KEY `thread_id` (`thread_id`)".
@@ -2440,7 +2440,7 @@ function init_table_thread_time_tracking()
 		"thread_time_hrs_billable float NOT NULL default '0', ".
 		"thread_time_hrs_payable float NOT NULL default '0', ".
 		"thread_time_working_agent_id bigint(20) unsigned NOT NULL default '0', ".
-		"thread_time_summary text NOT NULL, ".
+		"thread_time_summary text, ".
 		"thread_time_date_billed datetime NOT NULL default '0000-00-00 00:00:00', ".
 		"thread_time_created_by_id bigint(20) unsigned NOT NULL default '0', ".
 		"thread_time_created_date datetime NOT NULL default '0000-00-00 00:00:00', ".
@@ -2488,7 +2488,7 @@ function init_table_ticket_views()
 								 " `view_created_by_id` bigint(20) NOT NULL default '0',".
 								 " `view_private` tinyint(4) NOT NULL default '0',".
 								 " `view_queues` char(255) NOT NULL default '',".
-								 " `view_columns` text NOT NULL,".
+								 " `view_columns` text,".
 								 " `view_hide_statuses` char(255) NOT NULL default '',".
 								 " `view_only_assigned` tinyint(4) NOT NULL default '0',".
 								 " `view_adv_2line` tinyint(1) NOT NULL default '1',".
@@ -2737,7 +2737,7 @@ function init_table_user_layout()
 	$TABLE_DEF->create_sql = "CREATE TABLE `user_layout` (".
 		"`layout_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,".
 		"`user_id` BIGINT UNSIGNED DEFAULT 0 NOT NULL ,".
-		"`layout_data` TEXT NOT NULL ,".
+		"`layout_data` TEXT,".
 		"PRIMARY KEY ( `layout_id` ) ,".
 		"INDEX ( `user_id` ) ".
 		");";
@@ -2809,7 +2809,7 @@ function init_table_user_notification()
 	
 	$TABLE_DEF->create_sql = "CREATE TABLE `user_notification` (".
 								"  `user_id` bigint(20) unsigned NOT NULL default '0',".
-								"  `notify_options` text NOT NULL,".
+								"  `notify_options` text,".
 								"  UNIQUE KEY `user_id` (`user_id`)".
 								") TYPE=MyISAM";
 	
@@ -2875,7 +2875,7 @@ function init_table_user_sig()
 	$TABLE_DEF->create_sql = "CREATE TABLE `user_sig` (".
 								"  `sig_id` int(10) unsigned NOT NULL auto_increment,".
 								"  `user_id` int(10) unsigned NOT NULL default '0',".
-								"  `sig_content` text NOT NULL,".
+								"  `sig_content` text,".
 								"  PRIMARY KEY  (`sig_id`)".
 								") TYPE=MyISAM;";
 	  
@@ -3033,7 +3033,7 @@ function init_table_chat_canned_text()
 		"  `text_private` tinyint(4) unsigned NOT NULL default '0',".
 		"  `text_private_agent_id` bigint(20) unsigned NOT NULL default '0',".
 		"  `text_category` bigint(20) unsigned NOT NULL default '0',".
-		"  `canned_text` text NOT NULL,".
+		"  `canned_text` text,".
 		"  `last_update` bigint(20) default '0',".
 		"  PRIMARY KEY  (`text_id`),".
 		"  KEY `text_private` (`text_private`),".
@@ -3774,7 +3774,7 @@ function init_table_chat_visitors_to_invites()
 		"  `invite_date` bigint(20) NOT NULL default '0',".
 		"  `visitor_id` bigint(20) unsigned NOT NULL default '0',".
 		"  `agent_id` bigint(20) unsigned NOT NULL default '0',".
-		"  `invite_message` text NOT NULL,".
+		"  `invite_message` text,".
 		"  PRIMARY KEY  (`invite_id`),".
 		"  KEY `visitor_id` (`visitor_id`),".
 		"  KEY `agent_id` (`agent_id`)".
@@ -4083,7 +4083,7 @@ function init_table_gateway_session()
 		"  `login_timestamp` bigint(20) NOT NULL default '0',".
 		"  `last_timestamp` bigint(20) NOT NULL default '0',".
 		"  `requests` bigint(20) NOT NULL default '0',".
-		"  `session_data` longtext NOT NULL,".
+		"  `session_data` longtext,".
 		"  `chat_status` tinyint(3) unsigned NOT NULL default '0',".
 		"  PRIMARY KEY  (`session_id`),".
 		"  KEY `session_checker` (`user_id`,`php_sid_cookie`,`ip_address`),".
@@ -4128,7 +4128,7 @@ function init_table_heartbeat_event_payload()
 
    $TABLE_DEF->create_sql = "CREATE TABLE `heartbeat_event_payload` (".
 		"  `event_id` bigint(20) unsigned NOT NULL default '0',".
-		"  `payload` text NOT NULL,".
+		"  `payload` text,".
 		"  PRIMARY KEY  (`event_id`)".
 		") TYPE=MyISAM";
 
@@ -4297,7 +4297,7 @@ function init_table_saved_reports() {
 		"`report_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT ,".
 		"`report_name` CHAR( 32 ) NOT NULL ,".
 		"`report_category` INT ( 10 ) NOT NULL ,".
-		"`report_data` TEXT NOT NULL ,".
+		"`report_data` TEXT,".
 		"PRIMARY KEY ( `report_id` )".
 		");";
 
@@ -4324,7 +4324,7 @@ function init_table_user_prefs_xml() {
 		"`user_id` INT(11) UNSIGNED DEFAULT 0 NOT NULL ,".
 		"`workspace_id` INT(11) UNSIGNED DEFAULT 0 NOT NULL ,".
 		"`pref_id` INT(11) UNSIGNED DEFAULT 0 NOT NULL ,".
-		"`pref_xml` TEXT NOT NULL ,".
+		"`pref_xml` TEXT,".
 		"UNIQUE pref_key (".
 		"`user_id` ,".
 		"`workspace_id` ,".
