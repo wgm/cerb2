@@ -949,13 +949,13 @@ function init_table_log()
 	$TABLE_DEF->create_sql = "CREATE TABLE `log` (".
 								"  `log_id` bigint(20) unsigned NOT NULL auto_increment,".
 								"  `message` text,".
-								"  `log_date` timestamp(14) NOT NULL,".
+								"  `log_date` timestamp(14) NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,".
 								"  PRIMARY KEY  (`log_id`) ".
 								") TYPE=MyISAM;";
 
 	$TABLE_DEF->fields["log_id"] = new CER_DB_FIELD("log_id","bigint(20) unsigned","","PRI","","auto_increment");
 	$TABLE_DEF->fields["message"] = new CER_DB_FIELD("message","text","","","","");
-	$TABLE_DEF->fields["log_date"] = new CER_DB_FIELD("log_date","timestamp(14)","YES","","","");
+	$TABLE_DEF->fields["log_date"] = new CER_DB_FIELD("log_date","timestamp(14)","YES","","CURRENT_TIMESTAMP","on update current_timestamp");
 	
 	$TABLE_DEF->indexes["primary"] = new CER_DB_INDEX("primary","0","log_id");
 	
@@ -1097,11 +1097,11 @@ function init_table_product_key()
 	
 	$TABLE_DEF->create_sql = "CREATE TABLE `product_key` (".
   		"`key_file` text,".
-  		"`key_date` timestamp(14) NOT NULL".
+  		"`key_date` timestamp(14) NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP".
 		") TYPE=MyISAM;";
 
 	$TABLE_DEF->fields["key_file"] = new CER_DB_FIELD("key_file","text","","","","");
-	$TABLE_DEF->fields["key_date"] = new CER_DB_FIELD("key_date","timestamp(14)","YES","","","");
+	$TABLE_DEF->fields["key_date"] = new CER_DB_FIELD("key_date","timestamp(14)","YES","","CURRENT_TIMESTAMP","on update current_timestamp");
 	
 	table($TABLE_DEF);
 }
@@ -1120,7 +1120,7 @@ function init_table_product_key_info()
 		"`key_domains` tinytext,".
   		"`key_maxqueues` int(11) NOT NULL default '0',".
   		"`key_tagline` char(255) NOT NULL default '',".
-  		"`key_lastupdate` timestamp(14) NOT NULL,".
+  		"`key_lastupdate` timestamp(14) NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,".
   		"`key_type` tinyint(4) NOT NULL default '0',".
   		"`key_expiration` datetime NOT NULL default '0000-00-00 00:00:00'".
 		") TYPE=MyISAM;";
@@ -1128,7 +1128,7 @@ function init_table_product_key_info()
 	$TABLE_DEF->fields["key_domains"] = new CER_DB_FIELD("key_domains","tinytext","","","","");
 	$TABLE_DEF->fields["key_maxqueues"] = new CER_DB_FIELD("key_maxqueues","int(11)","","","0","");
 	$TABLE_DEF->fields["key_tagline"] = new CER_DB_FIELD("key_tagline","char(255)","","","","");
-	$TABLE_DEF->fields["key_lastupdate"] = new CER_DB_FIELD("key_lastupdate","timestamp(14)","YES","","","");
+	$TABLE_DEF->fields["key_lastupdate"] = new CER_DB_FIELD("key_lastupdate","timestamp(14)","YES","","CURRENT_TIMESTAMP","on update current_timestamp");
 	$TABLE_DEF->fields["key_type"] = new CER_DB_FIELD("key_type","tinyint(4)","","","0","");
 	$TABLE_DEF->fields["key_expiration"] = new CER_DB_FIELD("key_expiration","datetime","","","0000-00-00 00:00:00","");
 		
@@ -2325,7 +2325,7 @@ function init_table_ticket()
 								"  `ticket_date` datetime NOT NULL default '0000-00-00 00:00:00',".
 								"  `ticket_priority` tinyint(4) NOT NULL default '0',".
 								"  `ticket_status` enum('new','awaiting-reply','customer-reply','bounced','resolved','dead') NOT NULL default 'new',".
-								"  `last_update_date` timestamp(14) NOT NULL,".
+								"  `last_update_date` timestamp(14) NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,".
 								"  `ticket_assigned_to_id` int(10) unsigned NOT NULL default '0',".
 								"  `ticket_queue_id` int(10) unsigned NOT NULL default '0',".
 								"  `queue_addresses_id` int(11) NOT NULL default '0',".
@@ -2355,7 +2355,7 @@ function init_table_ticket()
 	$TABLE_DEF->fields["ticket_date"] = new CER_DB_FIELD("ticket_date","datetime","","MUL","0000-00-00 00:00:00","");
 	$TABLE_DEF->fields["ticket_priority"] = new CER_DB_FIELD("ticket_priority","tinyint(4)","","","0","");
 	$TABLE_DEF->fields["ticket_status"] = new CER_DB_FIELD("ticket_status","enum('new','awaiting-reply','customer-reply','bounced','resolved','dead')","","MUL","new","");
-	$TABLE_DEF->fields["last_update_date"] = new CER_DB_FIELD("last_update_date","timestamp(14)","YES","","","");
+	$TABLE_DEF->fields["last_update_date"] = new CER_DB_FIELD("last_update_date","timestamp(14)","YES","","CURRENT_TIMESTAMP","on update current_timestamp");
 	$TABLE_DEF->fields["ticket_assigned_to_id"] = new CER_DB_FIELD("ticket_assigned_to_id","int(10) unsigned","","","0","");
 	$TABLE_DEF->fields["ticket_queue_id"] = new CER_DB_FIELD("ticket_queue_id","int(10) unsigned","","MUL","0","");
 	$TABLE_DEF->fields["queue_addresses_id"] = new CER_DB_FIELD("queue_addresses_id","int(11)","","","0","");
@@ -2663,7 +2663,7 @@ function init_table_user()
 								"  `user_login` char(32) NOT NULL default '',".
 								"  `user_password` char(64) NOT NULL default '',".
 								"  `user_group_id` int(10) unsigned NOT NULL default '0',".
-								"  `user_last_login` timestamp(14) NOT NULL,".
+								"  `user_last_login` timestamp(14) NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,".
 								"  `user_superuser` tinyint(1) NOT NULL default '0',".
 								"  `user_disabled` tinyint(4) NOT NULL default '0',".
 								"  `user_xsp` tinyint(1) NOT NULL default '0',".
@@ -2678,7 +2678,7 @@ function init_table_user()
 	$TABLE_DEF->fields["user_login"] = new CER_DB_FIELD("user_login","char(32)","","UNI","","");
 	$TABLE_DEF->fields["user_password"] = new CER_DB_FIELD("user_password","char(64)","","","","");
 	$TABLE_DEF->fields["user_group_id"] = new CER_DB_FIELD("user_group_id","int(10) unsigned","","","0","");
-	$TABLE_DEF->fields["user_last_login"] = new CER_DB_FIELD("user_last_login","timestamp(14)","YES","","","");
+	$TABLE_DEF->fields["user_last_login"] = new CER_DB_FIELD("user_last_login","timestamp(14)","YES","","CURRENT_TIMESTAMP","on update current_timestamp");
 	$TABLE_DEF->fields["user_superuser"] = new CER_DB_FIELD("user_superuser","tinyint(1)","","","0","");
 	$TABLE_DEF->fields["user_disabled"] = new CER_DB_FIELD("user_disabled","tinyint(4)","","","0","");
 	$TABLE_DEF->fields["user_xsp"] = new CER_DB_FIELD("user_xsp","tinyint(1)","","","0","");

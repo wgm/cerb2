@@ -22,7 +22,8 @@ if(!defined('E_STRICT')) {
 }
 
 // Remove any PHP Notices as they shouldn't be shown in a production environment
-error_reporting(error_reporting() & ~E_NOTICE & ~E_STRICT);
+//error_reporting(error_reporting() & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED);
+error_reporting(E_NONE);
 
 function cer_error_handler ($type,
 $message,
